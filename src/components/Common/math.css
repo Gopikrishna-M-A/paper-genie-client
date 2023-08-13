@@ -53,7 +53,9 @@
         border: none;
         background-color: transparent !important;
         padding: 0 !important;
+        cursor: pointer;
 }
+
 
 :where(.css-dev-only-do-not-override-byeoj0).ant-collapse>.ant-collapse-item >.ant-collapse-header {
     align-items: flex-start;

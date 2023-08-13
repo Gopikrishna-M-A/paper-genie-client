@@ -33,7 +33,7 @@ export default function Questions() {
         <Option value="Science">Science</Option>
       </Select>
 
-      <QuestionList subject={selectedSubject} />
+      <QuestionList subject={selectedSubject} setSubject={setSelectedSubject} />
 
     
 

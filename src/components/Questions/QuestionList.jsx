@@ -1,59 +1,169 @@
 import React, { useState, useEffect } from 'react';
-import { Collapse } from 'antd';
+import { message, Modal, ConfigProvider, Button, Spin, Empty, Collapse, Tag } from 'antd';
 import MathQuillInput from '../Common/MathQuillInput'
+import EditForm from './EditForm';
 
 
-const QuestionList = ({ subject }) => {
+const QuestionList = ({ subject, setSubject }) => {
   const [questions, setQuestions] = useState([]);
+  const [editModalVisible, setEditModalVisible] = useState(false);
+  const [loading, setLoading] = useState(true); 
 
-
+  const handleSuccess = () => {
+    message.success('Question deleted successfully!');
+  };
+  
+  const handleError = () => {
+    message.error('Failed to delete question');
+  };
 
   useEffect(() => {
     const fetchQuestions = async () => {
         try {
+            setLoading(true)
             const response = await fetch(`http://localhost:4000/questions/subject/${subject}`);
             if (response.ok) {
               const data = await response.json();
               setQuestions(data);
-              console.log(data);
             } else {
               console.error('Failed to fetch questions:', response.statusText);
             }
           } catch (error) {
             console.error('Error fetching questions:', error);
+          } finally {
+            setLoading(false); // Turn off loading state
           }
     };
 
     fetchQuestions();
   }, [subject]);
 
+  useEffect(()=>{
+    const fetchQuestions = async () => {
+        try {
+            setLoading(true)
+            const response = await fetch(`http://localhost:4000/questions/subject/${subject}`);
+            if (response.ok) {
+              const data = await response.json();
+              setQuestions(data);
+            } else {
+              console.error('Failed to fetch questions:', response.statusText);
+            }
+          } catch (error) {
+            console.error('Error fetching questions:', error);
+          } finally {
+            setLoading(false); // Turn off loading state
+          }
+    };
+
+    fetchQuestions();
+  },[])
+
+  const handleDelete = async (id) => {
+    try {
+      // Show a confirmation modal before deleting
+      Modal.confirm({
+        title: 'Confirm Deletion',
+        content: 'Are you sure you want to delete this question?',
+        onOk: async () => {
+          try {
+            const response = await fetch(`http://localhost:4000/questions/${id}`, {
+              method: 'DELETE',
+            });
+
+            if (response.status === 200) {
+                handleSuccess()
+                setQuestions(questions.filter(q => q._id !== id));
+            } else {
+                handleError()
+            }
+          } catch (error) {
+            console.error('Error deleting question:', error);
+          }
+        },
+      });
+    } catch (error) {
+      console.error('Error handling deletion:', error);
+    }
+  };
+
+  const handleEdit = async(editedValues,id) => {
+    try {
+        const response = await fetch(`http://localhost:4000/questions/${id}`, {
+          method: 'PATCH',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(editedValues),
+        });
+    
+        if (response.ok) {
+            setQuestions((prevQuestions) =>
+            prevQuestions.map((question) =>
+              question._id === id ? { ...question, ...editedValues } : question
+            )
+          );
+        } else {
+          // Handle error, maybe show an error message
+        }
+      } catch (error) {
+        console.error('Error updating question:', error);
+      }
+  };
+
+
+
+
+
 
 
 
   return (
+    <ConfigProvider
+    theme={{
+      token: {
+        // Seed Token
+        colorPrimary: "#242527",
+        // Alias Token
+        colorBgContainer: "#ffffff",
+      },
+    }}
+  >
     <div className='Questions-wrapper'>
-    {questions.map((q,index) => (
-        <Collapse
-        key={ q._id } 
-        items={[
-            {
-            key: q._id,
-            label:   <MathQuillInput latex={q.question}/>,
-            children: (
-                <div>
-                  <p>Clevel: {q.Clevel}</p>
-                  <p>Dlevel: {q.Dlevel}</p>
-                  <p>mark: {q.mark}</p>
-                  <p>section: {q.section}</p>
-                  <p>space: {q.space}</p>
-                </div>
-              )
-            },
-        ]}
-        />
-    ))}
+      {loading ? ( // Display loading animation when loading is true
+        <Spin size="large" style={{marginTop:"20px"}} />
+      ) : questions.length === 0 ? (
+        <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} />
+      ) : (
+        questions.map((q, index) => (
+          <Collapse
+            className='collapsible'
+            expandIconPosition='end'
+            bordered={false}
+            key={q._id}
+            items={[
+              {
+                key: q._id,
+                label: <MathQuillInput latex={q.question} />,
+                children: (
+                  <div>
+                    <Tag className='collapse-tag' bordered={false} color="default">{q.Clevel}</Tag>
+                    <Tag className='collapse-tag' bordered={false} color={q.Dlevel === 'Easy' ? 'green' : q.Dlevel === 'Difficult' ? 'red' : q.Dlevel === 'Moderate' ? 'blue' : 'black' }>{q.Dlevel}</Tag>
+                    <Tag className='collapse-tag' bordered={false} color="default">mark : {q.mark}</Tag>
+                    <Tag className='collapse-tag' bordered={false} color="default">sec : {q.section}</Tag>
+                    <Tag className='collapse-tag' bordered={false} color="default">space : {q.space}</Tag>
+                    <Button size="small" type="primary" onClick={() => setEditModalVisible(true)} > Edit </Button>
+                    <Button onClick={() => handleDelete(q._id)} style={{marginLeft:"10px"}} size="small" type="primary"> Delete </Button>
+                    <EditForm visible={editModalVisible} onCancel={() => setEditModalVisible(false)} onEdit={handleEdit} id={q._id}/>
+                  </div>
+                ),
+              },
+            ]}
+          />
+        ))
+      )}
     </div>
-
+    </ConfigProvider>
   );
 };
 

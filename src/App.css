@@ -126,6 +126,9 @@ body{
   display: flex;
   flex-direction: column;
   justify-content: center;
+  max-width: 600px;
+  width: 100%;
+  margin: auto;
 }
 
 .Questions-wrapper{
@@ -133,9 +136,12 @@ body{
   flex-direction: column;
   gap: 10px;
   padding-top: 10px;
+
 }
 
-
+.collapse-tag{
+  margin-top: 10px;
+}
 
 
 
