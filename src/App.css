@@ -1,38 +1,207 @@
-.App {
-  text-align: center;
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&family=Righteous&display=swap');
+
+*{
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  --primary-color: #18181A;     
+  --secondary-color: #242527;
+  --pri-bg-color:#FBFBFB;
+  --sec-bg-color:#ffffff;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+body{
+  background-color: var(--pri-bg-color);
+  font-family: 'Poppins', sans-serif;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+
+/* COMMON */
+.section-head {
+  font-family: 'Righteous';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 20px;
+  display: flex;
+  gap: 10px;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.section-icon{
+  font-size: 20px;
+  font-weight: bold;
+}
+
+
+/* HOME */
+
+.Home-section{
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+.Home-head{
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 30px;
+}
+
+.Home-head-title{
+  font-family: 'Righteous';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 26px;
+  line-height: 116.5%;
+}
+
+.Home-head-para{
+  font-style: normal;
+  font-weight: 275;
+  font-size: 14px;
+  line-height: 21px;
+}
+
+.Home-cards-wrapper{
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.Home-Card{
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 15px;
+  background-color:  var(--sec-bg-color);
+  border-radius: 10px;
+  box-shadow: 0px 3px 25px 3px rgba(0, 0, 0, 0.1);
+  font-weight: 500;
+}
+
+.Home-card-head{
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.Home-card-head-icon{
+  font-size: 30px;  
+  font-weight: bold;
+}
+.Home-card-button{
+  display: flex;
+  align-items: center;
+  flex-direction: row-reverse;
+  justify-content: space-between;
+}
+
+
+
+
+/* ADD QUSTION */
+
+.Add-question-section{
+  padding: 20px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
 }
 
-.App-link {
-  color: #61dafb;
+.add-section-wrapper{
+  display: flex;
+  flex-direction: column;
+  max-width: 600px;
+  width: 100%;
+
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+
+
+/* QUSTIONS */
+.Questions-section{
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.Questions-wrapper{
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding-top: 10px;
+}
+
+
+
+
+
+
+
+
+/* FOOTER */
+.Footer {
+  padding: 10px;
+  display: flex;
+  margin-bottom: 20px;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  color: rgb(184, 184, 184);
+}
+
+
+
+
+@media (min-width: 711px) {
+
+  /* HOME */
+
+  .Home-section{
+    padding-left: 40px;
+    padding-right: 40px;
   }
-  to {
-    transform: rotate(360deg);
+  .Home-head-title{
+    max-width: 1000px;
+    width: 100%;
+    font-size: 55px;
   }
+
+  .Home-cards-wrapper{
+    flex-direction: row;
+    gap: 10px;
+  }
+
+
+
+}
+
+
+@media (min-width: 950px) {
+
+  /* HOME */
+
+  .Home-section{
+    padding-left: 40px;
+    padding-right: 40px;
+  }
+  .Home-head-title{
+    font-size: 75px;
+  }
+  .Home-Card{
+    width: 365px;
+  }
+  
+
+
+
+
+
+
 }

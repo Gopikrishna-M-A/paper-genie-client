@@ -1,0 +1,108 @@
+*::before,
+::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    font-size: 14px;
+    font-family: "Inter", sans-serif;
+}
+
+/* Non-navbar specific stuff moved to bottom of file */
+.nav {
+    width: 100vw;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    padding: 20px;
+    border-bottom: 1px solid #E2E2E2;
+}
+
+.nav-left-sec{
+    width: fit-content;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
+.nav__collapser {
+    font-size: 23px;
+    font-weight: bolder;
+
+}
+
+.nav__brand {
+    font-family: 'Righteous';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 25px;
+    line-height: 31px;
+}
+
+.nav__collapsable {
+    font-weight: 500;
+    font-size: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+    /* This is what hides the content */
+    overflow: hidden;
+    max-height: 0;
+    transition: padding 500ms ease, max-height 250ms ease;
+}
+
+
+.nav--expanded .nav__collapsable {
+    max-height: 500px;
+    /* This is what shows the content */
+    margin-top: 1rem;
+    padding: 2rem 0;
+}
+
+/* Desktop mode styles */
+@media (min-width: 700px) {
+    .nav {
+        padding-left: 40px;
+        padding-right: 40px;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+
+    }
+
+    .nav__collapser {
+        display: none;
+    }
+
+    .nav__collapsable {
+        max-height: 500px;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+    }
+
+    .nav__collapsable {
+        display: flex;
+        gap: 2rem;
+    }
+
+
+}
+
+@media (min-width: 1000px) {
+    html {
+        font-size: 1.25rem;
+    }
+}
+
+a {
+    text-decoration: none;
+    color: #000;
+}
+
