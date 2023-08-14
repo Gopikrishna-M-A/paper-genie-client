@@ -20,7 +20,7 @@ export default function Card({ icon, title, text, link }) {
         { icon && React.cloneElement(icon, { className: 'Home-card-head-icon' }) }
         <div className="Home-card-title">{ title }</div>
         </div>
-        <Link to={link}>
+        <Link className='btn-link-home' to={link}>
         <Button className='Home-card-button' type="primary" icon={ <ArrowRightOutlined /> } size={"large"}>
            { text }
         </Button>
