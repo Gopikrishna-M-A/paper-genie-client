@@ -7,17 +7,18 @@ import Questions from "./components/Questions/Questions";
 import AddQuestion from "./components/AddQuestion/AddQuestion";
 import Navbar from "./components/Common/Navbar";
 import Footer from "./components/Common/Footer";
+import QuestionPaper from "./components/QuestionPaper/QuestionPaper"
 
 function App() {
   return (
     <Router>
-      <Navbar></Navbar>
-
+      <Navbar className="nav" ></Navbar>
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/Add-question" element={<AddQuestion />} />
         <Route path="/Create-paper" element={<GeneratePaper />} />
         <Route path="/view-questions" element={<Questions />} />
+        <Route path="/question-paper" element={<QuestionPaper />} />
       </Routes>
 
       <Footer></Footer>

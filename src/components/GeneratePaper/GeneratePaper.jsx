@@ -1,120 +1,17 @@
-// import React, { useState } from 'react'
-// import SectionHead from '../Common/SectionHead'
-// import { CloudDownloadOutlined, PlusOutlined, CloseOutlined } from '@ant-design/icons';
-// import { ConfigProvider, Button, Typography, Form, Select } from 'antd';
-// import {  } from "react-router-dom";
-// const { Text } = Typography;
-
-
-// export default function GeneratePaper() {
-
-//   const [numSpecWrappers, setNumSpecWrappers] = useState(1);
-
-//   const addSpecWrapper = () => {
-//     setNumSpecWrappers(numSpecWrappers + 1);
-//   };
-//   const removeSpecWrapper = () => {
-//     setNumSpecWrappers(numSpecWrappers - 1);
-//   };
-
-
-
-
-//       return (
-//         <ConfigProvider
-//           theme={{
-//             token: {
-//               // Seed Token
-//               colorPrimary: "#242527",
-//               // Alias Token
-//               colorBgContainer: "#ffffff",
-//             },
-//           }}
-//         >
-//           <div className='Generate-paper-page'>
-            // <SectionHead
-            //   icon={<CloudDownloadOutlined />}
-            //   title={"GENERATE"}
-            // ></SectionHead>
-
-
-//             <div className='add-btn-wrapper' >
-//             <Text type="secondary">Number of questions : {numSpecWrappers}</Text>
-//             <Button onClick={addSpecWrapper} className='Home-card-button' type="primary" icon={ <PlusOutlined /> } size={"large"}>ADD</Button>
-//             </div>
-
-
-//             <Form className='Generate-form'>
-        
-//             {Array.from({ length: numSpecWrappers }).map((_, index) => (
-
-//                 <div key={index} className='question-generator-spec-wrapper' key={index}>
-
-//                   <Form.Item className='spec-item' name={`mark${index}`} hasFeedback>
-//                   <Select placeholder="Mark">
-//                       <Select.Option value="1">1</Select.Option>
-//                       <Select.Option value="2">2</Select.Option>
-//                       <Select.Option value="3">3</Select.Option>
-//                       <Select.Option value="4">4</Select.Option>
-//                   </Select>
-//                   </Form.Item>
-
-//                   <Form.Item className='spec-item' name={`section${index}`} hasFeedback>
-//                   <Select placeholder="Sec">
-//                       <Select.Option value="1">1</Select.Option>
-//                   </Select>
-//                   </Form.Item>
-
-//                   <Form.Item className='spec-item' name={`Dlevel${index}`} hasFeedback>
-//                   <Select placeholder="D level">
-//                       <Select.Option value="Easy">Easy</Select.Option>
-//                       <Select.Option value="Moderate">Moderate</Select.Option>
-//                       <Select.Option value="Difficult">Difficult</Select.Option>
-//                   </Select>
-//                   </Form.Item>
-
-//                   <Form.Item className='spec-item' name={`Clevel${index}`} hasFeedback>
-//                   <Select placeholder="C level">
-//                       <Select.Option value="Knowledge">Knowledge</Select.Option>
-//                       <Select.Option value="Comprehension">Comprehension</Select.Option>
-//                       <Select.Option value="Application">Application</Select.Option>
-//                       <Select.Option value="Analysis">Analysis</Select.Option>
-//                       <Select.Option value="Synthesis">Synthesis</Select.Option>
-//                   </Select>
-//                   </Form.Item>
-
-
-//                 <Button onClick={removeSpecWrapper} type="text" danger><CloseOutlined /></Button>
-
-              
-//                 </div>
-
-        
-//             ))}
-
-
-//           </Form>
-
-            
-//           </div>
-
-
-//         </ConfigProvider>
-
-//       )
-// }
-
 import SectionHead from '../Common/SectionHead'
 import React, { useState } from 'react';
 import { v4 as uuidv4 } from 'uuid';
+import { useNavigate } from 'react-router-dom';
 import { ConfigProvider, Button, Typography, Form, Select } from 'antd';
 import { CloudDownloadOutlined, PlusOutlined, CloseOutlined } from '@ant-design/icons';
 
 const { Text } = Typography;
 
 export default function GeneratePaper() {
+  const navigate = useNavigate();
+  const [loading, setLoading] = useState(false);
   const [criteria, setCriteria] = useState([{ key: uuidv4(), mark: "", section: "", Dlevel: "", Clevel: "" }]);
-
+  const [ subject,setSubject] = useState()
   const addCriteria = () => {
     const newCriteriaId = uuidv4();
     setCriteria([...criteria, { key: newCriteriaId, mark: "", section: "", Dlevel: "", Clevel: "" }]);
@@ -124,10 +21,6 @@ export default function GeneratePaper() {
     setCriteria(criteria.filter((criterion) => criterion.key !== criteriaKey));
   };
 
-  const show = ()=>{
-    console.log(criteria);
-  }
-
   const handleCriteriaChange = (criteriaKey, field, value) => {
     setCriteria((prevCriteria) =>
       prevCriteria.map((criterion) =>
@@ -135,6 +28,42 @@ export default function GeneratePaper() {
       )
     );
   };
+
+  const submitForm = async () => {
+    setLoading(true);
+    const formData = {
+      subject: subject, 
+      criteria: criteria, 
+    };
+  
+    console.log(formData);
+    try {
+      const response = await fetch('http://localhost:4000/questions/filter', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
+  
+      if (response.ok) {
+        // Handle the response from the server
+        const data = await response.json();
+        console.log("response:",data);
+        navigate('/question-paper',{ state: data });
+        setLoading(false);
+        // Do something with the filtered questions data
+      } else {
+        // Handle error response
+        console.error('Error:', response.statusText);
+      }
+    } catch (error) {
+      console.error('Error sending request:', error);
+    }
+  };
+  
+
+
 
   return (
     <ConfigProvider
@@ -158,6 +87,16 @@ export default function GeneratePaper() {
           <Text type="secondary">Number of Questions: {criteria.length}</Text>
           <Button onClick={addCriteria} className='Home-card-button' type="primary" icon={<PlusOutlined />} size={"large"}>ADD</Button>
         </div>
+
+        <Select 
+        placeholder="Subject"
+        onChange={(value) => setSubject(value)}>
+             <Select.Option value="Maths">Maths</Select.Option>
+             <Select.Option value="Science">Science</Select.Option>
+             <Select.Option value="English">English</Select.Option>
+         </Select>
+
+        
 
         <Form className='Generate-form'>
           {criteria.map((criterion) => (
@@ -243,7 +182,7 @@ export default function GeneratePaper() {
             </div>
           ))}
 
-          <Button className='Generate-btn' type="primary" size='large' onClick={show} htmlType='submit'>GENERATE PAPER</Button>
+          <Button className='Generate-btn' type="primary" size='large' onClick={submitForm} htmlType='submit' loading={loading}>GENERATE PAPER</Button>
         </Form>
       </div>
     </ConfigProvider>
