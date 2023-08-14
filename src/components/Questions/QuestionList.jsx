@@ -88,6 +88,7 @@ const QuestionList = ({ subject, setSubject }) => {
   };
 
   const handleEdit = async(editedValues,id) => {
+    console.log(editedValues);
     try {
         const response = await fetch(`http://localhost:4000/questions/${id}`, {
           method: 'PATCH',
