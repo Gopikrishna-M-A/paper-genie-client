@@ -1,6 +1,6 @@
 import React from 'react'
 import { useLocation } from 'react-router-dom';
-import { Divider, Typography } from 'antd';
+import { Divider, Table, Typography } from 'antd';
 import  "./question-paper.css"
 import MathQuillInput from '../Common/MathQuillInput'
 
@@ -118,7 +118,7 @@ export default function QuestionPaper() {
         <div style={{margin:"100px 0px"}}></div>
 
         {questions.map((question, index) => (
-          <div key={index}>
+          <div className='question-paper-math' key={index}>
           <Divider className='line'/>
           <div className='qusetion-head'>
           <Text>Question {index + 1}</Text>
@@ -127,6 +127,17 @@ export default function QuestionPaper() {
           <Divider className='line'/>
           <MathQuillInput latex={question.question} />
           <Divider className='line'/>
+          {question.tableData && (
+          <Table
+            rowKey="id"
+            dataSource={JSON.parse(question.tableData)}
+            columns={[
+              { dataIndex: 'col0', key: 'col0' },
+              { dataIndex: 'col1', key: 'col1' },
+            ]}
+            pagination={false}
+            />
+          )}
           {[...Array(question.space)].map((_, spaceIndex) => (
             <Divider key={spaceIndex} dashed />
           ))}

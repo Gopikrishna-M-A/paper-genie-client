@@ -35,7 +35,7 @@
 
 
 
-.input-row-col{
+.input-row-col .mq-root-block{
     margin-top: 10px;
     display: flex;
     justify-content: space-between;
@@ -46,7 +46,13 @@
 
 
 
+
+
 /* ***************** */
+
+:where(.css-dev-only-do-not-override-byeoj0).ant-collapse>.ant-collapse-item >.ant-collapse-header {
+    align-items: flex-start;
+}
 
 
 #math-display .mq-root-block,#math-display  .mq-math-mode .mq-root-block{
@@ -56,15 +62,16 @@
         cursor: pointer;
 }
 
-
-:where(.css-dev-only-do-not-override-byeoj0).ant-collapse>.ant-collapse-item >.ant-collapse-header {
-    align-items: flex-start;
-}
-
-
 #math-display .mq-root-block:hover{
     border: none !important;
 }
 #math-display .mq-root-block:active{
     box-shadow: none !important;
+}
+
+
+
+
+:where(.css-dev-only-do-not-override-byeoj0).ant-table-wrapper .ant-table-thead >tr>th:not(:last-child):not(.ant-table-selection-column):not(.ant-table-row-expand-icon-cell):not([colspan])::before, :where(.css-dev-only-do-not-override-byeoj0).ant-table-wrapper .ant-table-thead >tr>td:not(:last-child):not(.ant-table-selection-column):not(.ant-table-row-expand-icon-cell):not([colspan])::before {
+    display: none;
 }
