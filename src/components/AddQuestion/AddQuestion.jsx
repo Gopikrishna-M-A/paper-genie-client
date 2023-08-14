@@ -29,6 +29,7 @@ export default function AddQuestion() {
   const [rowCount, setRowCount] = useState(null); // Add actual value
   const [colCount, setColCount] = useState(null); // Add actual value
   const [subject, setSubject] = useState(null); // Add actual value
+  const [loading, setLoading] = useState(false); // Add actual value
 
       const handleSuccess = () => {
         message.success('Question added successfully!');
@@ -39,6 +40,7 @@ export default function AddQuestion() {
       };
 
     const handleSubmit = async (values) => {
+      setLoading(true)
       const formData = new FormData();
   
       formData.append("question", equation);
@@ -73,6 +75,7 @@ export default function AddQuestion() {
         });
         console.log("Response data:", response.data);
         handleSuccess();
+        setLoading(false)
       } catch (error) {
         console.error("Error:", error);
         handleError();
@@ -282,7 +285,7 @@ export default function AddQuestion() {
             </Form.Item>
 
             <Form.Item>
-              <Button block type="primary" htmlType="submit">Submit</Button>
+              <Button block type="primary" htmlType="submit" loading={loading}>Submit</Button>
             </Form.Item>
 
           </Form>
