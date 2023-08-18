@@ -90,3 +90,16 @@
         display: none !important;
     }
   }
+
+
+  .equation-editor-container {
+    position: relative;
+  }
+
+  .equation-editor-placeholder {
+    position: absolute;
+    top: 50%;
+    left: 11px;
+    transform: translate(0,-50%);
+    color: #bfbfbf;
+  }

@@ -45,12 +45,17 @@ const EditForm = ({ visible, onCancel, onEdit, subject }) => {
 
             {subject === "Maths" ? (
                 <Form.Item label="Question" >
+                  <div className="equation-editor-container">
                   <EquationEditor
                     value={question}
                     onChange={setQuestion}
                     autoCommands="pi theta sqrt sum prod alpha beta gamma rho int"
                     autoOperatorNames="sin cos tan"
                   />
+                    {!question && (
+                    <div className="equation-editor-placeholder">Type your equation here...</div>
+                  )}
+                </div>
                 </Form.Item>
               ) : (
                 <Form.Item 
@@ -58,6 +63,7 @@ const EditForm = ({ visible, onCancel, onEdit, subject }) => {
                 name="question"
                 >
                   <TextArea rows={4} 
+                  placeholder='Type your Question here...'
                   onChange={(e) => setQuestion(e.target.value)}
                   />
                 </Form.Item>
