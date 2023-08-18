@@ -84,3 +84,9 @@
   .ant-form-item-control {
     flex: 1;
   }
+
+  @media (width < 576px){
+    .ant-form-item-label {
+        display: none !important;
+    }
+  }
