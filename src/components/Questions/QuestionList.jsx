@@ -24,7 +24,7 @@ const QuestionList = ({ subject, setSubject }) => {
     const fetchQuestions = async () => {
         try {
             setLoading(true)
-            const response = await fetch(`http://localhost:4000/questions/subject/${subject}`);
+            const response = await fetch(`https://question-paper-api.onrender.com/questions/subject/${subject}`);
             if (response.ok) {
               const data = await response.json();
               setQuestions(data);
@@ -45,7 +45,7 @@ const QuestionList = ({ subject, setSubject }) => {
     const fetchQuestions = async () => {
         try {
             setLoading(true)
-            const response = await fetch(`http://localhost:4000/questions/subject/${subject}`);
+            const response = await fetch(`https://question-paper-api.onrender.com/questions/subject/${subject}`);
             if (response.ok) {
               const data = await response.json();
               setQuestions(data);
@@ -70,7 +70,7 @@ const QuestionList = ({ subject, setSubject }) => {
         content: 'Are you sure you want to delete this question?',
         onOk: async () => {
           try {
-            const response = await fetch(`http://localhost:4000/questions/${id}`, {
+            const response = await fetch(`https://question-paper-api.onrender.com/questions/${id}`, {
               method: 'DELETE',
             });
 
@@ -93,7 +93,7 @@ const QuestionList = ({ subject, setSubject }) => {
   const handleEdit = async(editedValues) => {
     
     try {
-        const response = await fetch(`http://localhost:4000/questions/${questionId}`, {
+        const response = await fetch(`https://question-paper-api.onrender.com/questions/${questionId}`, {
           method: 'PATCH',
           headers: {
             'Content-Type': 'application/json',

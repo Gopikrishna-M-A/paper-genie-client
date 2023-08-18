@@ -68,7 +68,7 @@ export default function AddQuestion() {
 
 
       try {
-        const response = await axios.post("http://localhost:4000/questions", formData, {
+        const response = await axios.post("https://question-paper-api.onrender.com/questions", formData, {
           headers: {
             "Content-Type": "multipart/form-data", // Set content type to multipart/form-data
           },
