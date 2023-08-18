@@ -75,3 +75,12 @@
 :where(.css-dev-only-do-not-override-byeoj0).ant-table-wrapper .ant-table-thead >tr>th:not(:last-child):not(.ant-table-selection-column):not(.ant-table-row-expand-icon-cell):not([colspan])::before, :where(.css-dev-only-do-not-override-byeoj0).ant-table-wrapper .ant-table-thead >tr>td:not(:last-child):not(.ant-table-selection-column):not(.ant-table-row-expand-icon-cell):not([colspan])::before {
     display: none;
 }
+
+.ant-form-item-label {
+    width: 70px; /* Adjust the width as needed */
+    text-align: left !important; /* Adjust alignment as needed */
+  }
+
+  .ant-form-item-control {
+    flex: 1;
+  }

@@ -165,7 +165,7 @@ const QuestionList = ({ subject, setSubject }) => {
                     }
                       > Edit </Button>
                     <Button onClick={() => handleDelete(q._id)} style={{marginLeft:"10px"}} size="small" type="primary"> Delete </Button>
-                    <EditForm visible={editModalVisible} onCancel={() => setEditModalVisible(false)} onEdit={handleEdit}/>
+                    <EditForm visible={editModalVisible} onCancel={() => setEditModalVisible(false)} onEdit={handleEdit} subject={subject}/>
                   </div> 
                 ),
               },

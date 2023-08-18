@@ -1,13 +1,28 @@
-import React, { useState } from 'react';
-import { Modal, Form, Button, Select, InputNumber } from 'antd';
+import React, { useState, useEffect } from 'react';
+import { Modal, Form, Button, Input, Select, InputNumber } from 'antd';
+import EquationEditor from 'equation-editor-react';
+const { TextArea } = Input;
 
-const EditForm = ({ visible, onCancel, onEdit }) => {
-  const [editedValues, setEditedValues] = useState({ /* initial values */ });
+const EditForm = ({ visible, onCancel, onEdit, subject }) => {
+  const [question, setQuestion] = useState()
+  const [editedValues, setEditedValues] = useState({});
+  useEffect(() => {
+    // Reset the question and editedValues states when the modal is opened
+    setQuestion('')
+    setEditedValues({})
+  }, [visible])
+
 
   const handleFormSubmit = () => {
     // Call the onEdit function and pass the updated values
-    onEdit(editedValues);
+    const updatedValues = { ...editedValues };
+    if (question !== undefined && question.trim() !== "") {
+      updatedValues.question = question;
+    }
+    console.log(updatedValues);
+    onEdit(updatedValues);
     onCancel(); // Close the modal
+    setQuestion('')
   };
 
   return (
@@ -23,12 +38,34 @@ const EditForm = ({ visible, onCancel, onEdit }) => {
           Save
         </Button>,
       ]}
+      destroyOnClose={true} 
     >
       <Form >
         {/* Add form fields for editing */}
 
 
-            <Form.Item name="Dlevel" hasFeedback>
+            {subject === "Maths" ? (
+                <Form.Item label="Question" >
+                  <EquationEditor
+                    value={question}
+                    onChange={setQuestion}
+                    autoCommands="pi theta sqrt sum prod alpha beta gamma rho int"
+                    autoOperatorNames="sin cos tan"
+                  />
+                </Form.Item>
+              ) : (
+                <Form.Item 
+                label="Question"
+                name="question"
+                >
+                  <TextArea rows={4} 
+                  onChange={(e) => setQuestion(e.target.value)}
+                  />
+                </Form.Item>
+              )}
+
+
+            <Form.Item label="Difficulty" name="Dlevel" hasFeedback>
             <Select
                 placeholder="Difficulty level"
                 onChange={(value) =>
@@ -41,7 +78,7 @@ const EditForm = ({ visible, onCancel, onEdit }) => {
             </Select>
             </Form.Item>
 
-            <Form.Item name="Clevel" hasFeedback>
+            <Form.Item label="Cognitive" name="Clevel" hasFeedback>
             <Select
                 placeholder="Cognitive level"
                 onChange={(value) =>
@@ -56,7 +93,7 @@ const EditForm = ({ visible, onCancel, onEdit }) => {
             </Select>
             </Form.Item>
 
-            <Form.Item name="mark" hasFeedback>
+            <Form.Item label="Mark" name="mark" hasFeedback>
             <InputNumber
                 placeholder="Mark"
                 onChange={(value) =>
@@ -65,7 +102,7 @@ const EditForm = ({ visible, onCancel, onEdit }) => {
             />
             </Form.Item>
 
-            <Form.Item name="section" hasFeedback>
+            <Form.Item label="Section" name="section" hasFeedback>
             <InputNumber
                 placeholder="Section"
                 onChange={(value) =>
@@ -74,7 +111,7 @@ const EditForm = ({ visible, onCancel, onEdit }) => {
             />
             </Form.Item>
 
-            <Form.Item name="space" hasFeedback>
+            <Form.Item label="Space" name="space" hasFeedback>
             <InputNumber
                 placeholder="Space"
                 onChange={(value) =>
