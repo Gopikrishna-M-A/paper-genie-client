@@ -38,7 +38,7 @@ export default function GeneratePaper() {
   
     console.log(formData);
     try {
-      const response = await fetch('https://question-paper-api.onrender.com/questions/filter', {
+      const response = await fetch('http://localhost:4000/questions/filter', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

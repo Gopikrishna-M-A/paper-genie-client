@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 import { Modal, Form, Button, Select, InputNumber } from 'antd';
 
-const EditForm = ({ visible, onCancel, onEdit,id }) => {
+const EditForm = ({ visible, onCancel, onEdit }) => {
   const [editedValues, setEditedValues] = useState({ /* initial values */ });
 
   const handleFormSubmit = () => {
     // Call the onEdit function and pass the updated values
-    onEdit(editedValues,id);
+    onEdit(editedValues);
     onCancel(); // Close the modal
   };
 

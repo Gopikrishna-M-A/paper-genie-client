@@ -8,20 +8,23 @@ const QuestionList = ({ subject, setSubject }) => {
   const [questions, setQuestions] = useState([]);
   const [editModalVisible, setEditModalVisible] = useState(false);
   const [loading, setLoading] = useState(true); 
+  const [questionId, setQuestionId] = useState()
 
-  const handleSuccess = () => {
-    message.success('Question deleted successfully!');
+  
+
+  const handleSuccess = (msg) => {
+    message.success(msg);
   };
   
-  const handleError = () => {
-    message.error('Failed to delete question');
+  const handleError = (msg) => {
+    message.error(msg);
   };
 
   useEffect(() => {
     const fetchQuestions = async () => {
         try {
             setLoading(true)
-            const response = await fetch(`https://question-paper-api.onrender.com/questions/subject/${subject}`);
+            const response = await fetch(`http://localhost:4000/questions/subject/${subject}`);
             if (response.ok) {
               const data = await response.json();
               setQuestions(data);
@@ -42,7 +45,7 @@ const QuestionList = ({ subject, setSubject }) => {
     const fetchQuestions = async () => {
         try {
             setLoading(true)
-            const response = await fetch(`https://question-paper-api.onrender.com/questions/subject/${subject}`);
+            const response = await fetch(`http://localhost:4000/questions/subject/${subject}`);
             if (response.ok) {
               const data = await response.json();
               setQuestions(data);
@@ -67,15 +70,15 @@ const QuestionList = ({ subject, setSubject }) => {
         content: 'Are you sure you want to delete this question?',
         onOk: async () => {
           try {
-            const response = await fetch(`https://question-paper-api.onrender.com/questions/${id}`, {
+            const response = await fetch(`http://localhost:4000/questions/${id}`, {
               method: 'DELETE',
             });
 
             if (response.status === 200) {
-                handleSuccess()
+                handleSuccess("Question deleted successfully!")
                 setQuestions(questions.filter(q => q._id !== id));
             } else {
-                handleError()
+                handleError("Failed to delete question")
             }
           } catch (error) {
             console.error('Error deleting question:', error);
@@ -87,10 +90,10 @@ const QuestionList = ({ subject, setSubject }) => {
     }
   };
 
-  const handleEdit = async(editedValues,id) => {
-    console.log(editedValues);
+  const handleEdit = async(editedValues) => {
+    
     try {
-        const response = await fetch(`https://question-paper-api.onrender.com/questions/${id}`, {
+        const response = await fetch(`http://localhost:4000/questions/${questionId}`, {
           method: 'PATCH',
           headers: {
             'Content-Type': 'application/json',
@@ -101,11 +104,12 @@ const QuestionList = ({ subject, setSubject }) => {
         if (response.ok) {
             setQuestions((prevQuestions) =>
             prevQuestions.map((question) =>
-              question._id === id ? { ...question, ...editedValues } : question
+              question._id === questionId ? { ...question, ...editedValues } : question
             )
           );
+          handleSuccess("Question edited successfully!")
         } else {
-          // Handle error, maybe show an error message
+          handleError("Error in editing!")
         }
       } catch (error) {
         console.error('Error updating question:', error);
@@ -140,7 +144,7 @@ const QuestionList = ({ subject, setSubject }) => {
           <Collapse
             className='collapsible'
             expandIconPosition='end'
-            bordered={false}
+            bordered={false}  
             key={q._id}
             items={[
               {
@@ -153,10 +157,16 @@ const QuestionList = ({ subject, setSubject }) => {
                     <Tag className='collapse-tag' bordered={false} color="default">mark : {q.mark}</Tag>
                     <Tag className='collapse-tag' bordered={false} color="default">sec : {q.section}</Tag>
                     <Tag className='collapse-tag' bordered={false} color="default">space : {q.space}</Tag>
-                    <Button size="small" type="primary" onClick={() => setEditModalVisible(true)} > Edit </Button>
+                    <Button size="small" type="primary" 
+                    onClick={() => {
+                      setEditModalVisible(true)
+                      setQuestionId(q._id)
+                    }
+                    }
+                      > Edit </Button>
                     <Button onClick={() => handleDelete(q._id)} style={{marginLeft:"10px"}} size="small" type="primary"> Delete </Button>
-                    <EditForm visible={editModalVisible} onCancel={() => setEditModalVisible(false)} onEdit={handleEdit} id={q._id}/>
-                  </div>
+                    <EditForm visible={editModalVisible} onCancel={() => setEditModalVisible(false)} onEdit={handleEdit}/>
+                  </div> 
                 ),
               },
             ]}
