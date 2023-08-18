@@ -19,7 +19,6 @@ const EditForm = ({ visible, onCancel, onEdit, subject }) => {
     if (question !== undefined && question.trim() !== "") {
       updatedValues.question = question;
     }
-    console.log(updatedValues);
     onEdit(updatedValues);
     onCancel(); // Close the modal
     setQuestion('')

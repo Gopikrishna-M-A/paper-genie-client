@@ -76,11 +76,3 @@
     display: none;
 }
 
-.ant-form-item-label {
-    width: 70px; /* Adjust the width as needed */
-    text-align: left !important; /* Adjust alignment as needed */
-  }
-
-  .ant-form-item-control {
-    flex: 1;
-  }
