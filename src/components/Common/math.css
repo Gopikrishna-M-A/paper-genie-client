@@ -107,6 +107,10 @@
     cursor: pointer;
 }
 
+#math-display .mq-root-block{
+    font-size: 15px;
+}
+
 #math-display .mq-root-block:hover{
 border: none !important;
 }
