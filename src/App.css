@@ -121,7 +121,9 @@ body{
 
 }
 
-
+.input-row-col{
+  margin-top: 20px;
+}
 
 /* QUSTIONS */
 .Questions-section{
