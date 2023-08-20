@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { message, Modal, ConfigProvider, Button, Spin, Empty, Collapse, Tag } from 'antd';
-import MathQuillInput from '../Common/MathQuillInput'
+import { MathQuillStatic } from '../Common/MathQuillInput.jsx'
 import EditForm from './EditForm';
-
-
+import baseURL from '../baseURL'
+import "../Common/eq1.css"
+import "../Common/eq2.css"
 const QuestionList = ({ subject, setSubject }) => {
   const [questions, setQuestions] = useState([]);
   const [editModalVisible, setEditModalVisible] = useState(false);
@@ -24,7 +25,7 @@ const QuestionList = ({ subject, setSubject }) => {
     const fetchQuestions = async () => {
         try {
             setLoading(true)
-            const response = await fetch(`https://question-paper-api.onrender.com/questions/subject/${subject}`);
+            const response = await fetch(`${baseURL}/questions/subject/${subject}`);
             if (response.ok) {
               const data = await response.json();
               setQuestions(data);
@@ -45,7 +46,7 @@ const QuestionList = ({ subject, setSubject }) => {
     const fetchQuestions = async () => {
         try {
             setLoading(true)
-            const response = await fetch(`https://question-paper-api.onrender.com/questions/subject/${subject}`);
+            const response = await fetch(`${baseURL}/questions/subject/${subject}`);
             if (response.ok) {
               const data = await response.json();
               setQuestions(data);
@@ -70,7 +71,7 @@ const QuestionList = ({ subject, setSubject }) => {
         content: 'Are you sure you want to delete this question?',
         onOk: async () => {
           try {
-            const response = await fetch(`https://question-paper-api.onrender.com/questions/${id}`, {
+            const response = await fetch(`${baseURL}/questions/${id}`, {
               method: 'DELETE',
             });
 
@@ -93,7 +94,7 @@ const QuestionList = ({ subject, setSubject }) => {
   const handleEdit = async(editedValues) => {
     
     try {
-        const response = await fetch(`https://question-paper-api.onrender.com/questions/${questionId}`, {
+        const response = await fetch(`${baseURL}/questions/${questionId}`, {
           method: 'PATCH',
           headers: {
             'Content-Type': 'application/json',
@@ -149,7 +150,11 @@ const QuestionList = ({ subject, setSubject }) => {
             items={[
               {
                 key: q._id,
-                label: <MathQuillInput latex={q.question} />,
+                label: subject === "Maths" ? (
+                  <MathQuillStatic latex={q.question} />
+                ) : (
+                  q.question
+                ) ,
                 children: (
                   <div>
                     <Tag className='collapse-tag' bordered={false} color="default">{q.Clevel}</Tag>

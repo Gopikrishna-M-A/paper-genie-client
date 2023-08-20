@@ -1,17 +1,50 @@
 import SectionHead from '../Common/SectionHead'
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 import { useNavigate } from 'react-router-dom';
-import { ConfigProvider, Button, Typography, Form, Select } from 'antd';
+import { ConfigProvider, Button, message, Typography, Form, Select } from 'antd';
 import { CloudDownloadOutlined, PlusOutlined, CloseOutlined } from '@ant-design/icons';
+import baseURL from '../baseURL'
 
 const { Text } = Typography;
 
 export default function GeneratePaper() {
+
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
   const [criteria, setCriteria] = useState([{ key: uuidv4(), mark: "", section: "", Dlevel: "", Clevel: "" }]);
   const [ subject,setSubject] = useState()
+  const [ section,setSection] = useState()
+
+
+  useEffect(() => {
+    // Fetch data based on the selected subject
+    if (subject) {
+      fetchSubTopics(subject);
+    } else {
+      // Reset sub-topic options when subject is not selected
+      // setSubTopicOptions([]);
+    }
+  }, [subject]);
+
+  const fetchSubTopics = async (selectedSubject) => {
+    try {
+      const response = await fetch(`${baseURL}/questions/subject/${selectedSubject}`);
+      if (response.ok) {
+        const data = await response.json();
+        const sec = new Set();
+        data.forEach(question => {
+          sec.add(question.section);
+        })
+        setSection(sec)
+      } else {
+        console.error('Failed to fetch sub-topics:', response.statusText);
+      }
+    } catch (error) {
+      console.error('Error fetching sub-topics:', error);
+    }
+  };
+
   const addCriteria = () => {
     const newCriteriaId = uuidv4();
     setCriteria([...criteria, { key: newCriteriaId, mark: "", section: "", Dlevel: "", Clevel: "" }]);
@@ -19,6 +52,14 @@ export default function GeneratePaper() {
 
   const removeCriteria = (criteriaKey) => {
     setCriteria(criteria.filter((criterion) => criterion.key !== criteriaKey));
+  };
+
+  const handleSuccess = (msg) => {
+    message.success(msg);
+  };
+  
+  const handleError = (msg) => {
+    message.error(msg);
   };
 
   const handleCriteriaChange = (criteriaKey, field, value) => {
@@ -36,9 +77,8 @@ export default function GeneratePaper() {
       criteria: criteria, 
     };
   
-    console.log(formData);
     try {
-      const response = await fetch('https://question-paper-api.onrender.com/questions/filter', {
+      const response = await fetch(`${baseURL}/questions/filter`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -49,13 +89,17 @@ export default function GeneratePaper() {
       if (response.ok) {
         // Handle the response from the server
         const data = await response.json();
-        console.log("response:",data);
-        navigate('/question-paper',{ state: data });
+        if(data.unmatchedCriteria.length > 0){
+          handleError("no match found for some criteria!")
+        }else{
+          navigate('/question-paper',{ state: data });
+        }
         setLoading(false);
-        // Do something with the filtered questions data
+
       } else {
-        // Handle error response
+        handleError(response.statusText)
         console.error('Error:', response.statusText);
+        setLoading(false);
       }
     } catch (error) {
       console.error('Error sending request:', error);
@@ -134,7 +178,12 @@ export default function GeneratePaper() {
                  ]}>
                  <Select placeholder="Section"
                  onChange={(value) => handleCriteriaChange(criterion.key, "section", value)}>
-                     <Select.Option value="1">1</Select.Option>
+                  {section &&
+                      Array.from(section).map(sec => (
+                        <Select.Option key={sec} value={sec}>
+                          {sec}
+                        </Select.Option>
+                      ))}
                  </Select>
                  </Form.Item>
 

@@ -2,14 +2,14 @@ import React from 'react'
 import { useLocation } from 'react-router-dom';
 import { Divider, Table, Typography } from 'antd';
 import  "./question-paper.css"
-import MathQuillInput from '../Common/MathQuillInput'
+import { MathQuillStatic } from '../Common/MathQuillInput'
+import baseURL from '../baseURL'
 
 const { Text } = Typography;
 export default function QuestionPaper() {
   const location = useLocation();
   const data = location.state;
   const questions = data.matchedQuestions
-  console.log(questions);
 
   return (
     <div className="Question-paper-section">
@@ -125,10 +125,14 @@ export default function QuestionPaper() {
           <Text>{question.mark} marks</Text>
           </div>
           <Divider className='line'/>
-          <MathQuillInput latex={question.question} />
-          <Divider className='line'/>
+          
+          <MathQuillStatic latex={question.question} />
+
+          {question.imageSrc && <img className='question-img' src={baseURL+"/questions/getImage/"+question.imageSrc} alt="" />}
+
           {question.tableData && (
-          <Table
+          <Table 
+            className='question-table'
             rowKey="id"
             dataSource={JSON.parse(question.tableData)}
             columns={[
@@ -138,9 +142,20 @@ export default function QuestionPaper() {
             pagination={false}
             />
           )}
+
+          <div className="options">
+          {question.opta && <Text>Option A: {question.opta}</Text>}
+          {question.optb && <Text>Option B: {question.optb}</Text>}
+          {question.optc && <Text>Option C: {question.optc}</Text>}
+          {question.optd && <Text>Option D: {question.optd}</Text>}
+          </div>
+
+          <Divider className='line'/>
+
           {[...Array(question.space)].map((_, spaceIndex) => (
             <Divider key={spaceIndex} dashed />
           ))}
+
           </div>
         ))}
       </div>

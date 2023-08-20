@@ -1,7 +1,7 @@
 import React from 'react';
-import { StaticMathField } from 'react-mathquill';
+import { StaticMathField , EditableMathField} from 'react-mathquill';
 
-const MathQuillInput = ({latex}) => {
+export const MathQuillStatic = ({latex}) => {
     return (
         <div id='math-display'>
             <StaticMathField>{latex}</StaticMathField>
@@ -9,4 +9,12 @@ const MathQuillInput = ({latex}) => {
     );
 };
 
-export default MathQuillInput;
+export const MathQuillEdit = ({latex}) => {
+    return (
+        <div id='math-display'>
+            <EditableMathField>{latex}</EditableMathField>
+        </div>
+    );
+};
+
+

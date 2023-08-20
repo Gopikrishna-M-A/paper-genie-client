@@ -3,6 +3,7 @@ import SectionHead from "../Common/SectionHead";
 import "../Common/math.css";
 import axios from "axios";
 import EquationEditor from 'equation-editor-react';
+import baseURL from '../baseURL'
 import {
   message,
   Button,
@@ -24,7 +25,7 @@ const normFile = (e) => {
 };
 
 export default function AddQuestion() {
-  const [equation, setEquation] = useState("Question ...");
+  const [equation, setEquation] = useState("");
   const [tableData, setTableData] = useState(null); // Add actual value
   const [rowCount, setRowCount] = useState(null); // Add actual value
   const [colCount, setColCount] = useState(null); // Add actual value
@@ -68,7 +69,7 @@ export default function AddQuestion() {
 
 
       try {
-        const response = await axios.post("https://question-paper-api.onrender.com/questions", formData, {
+        const response = await axios.post(`${baseURL}/questions`, formData, {
           headers: {
             "Content-Type": "multipart/form-data", // Set content type to multipart/form-data
           },
@@ -133,13 +134,17 @@ export default function AddQuestion() {
 
             {subject === "Maths" ? (
               <Form.Item >
-                <EquationEditor
-                  placeholder="type new question here ..."
-                  value={equation}
-                  onChange={setEquation}
-                  autoCommands="pi theta sqrt sum prod alpha beta gamma rho int"
-                  autoOperatorNames="sin cos tan"
-                />
+                <div className="equation-editor-container">
+                  <EquationEditor
+                    value={equation}
+                    onChange={setEquation}
+                    autoCommands="pi theta sqrt sum prod alpha beta gamma rho int"
+                    autoOperatorNames="sin cos tan"
+                  />
+                    {!equation && (
+                    <div className="equation-editor-placeholder">Type your equation here...</div>
+                  )}
+                </div>
               </Form.Item>
             ) : (
               <Form.Item 

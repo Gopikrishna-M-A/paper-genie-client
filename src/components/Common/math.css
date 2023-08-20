@@ -1,8 +1,8 @@
-.mq-root-block, .mq-math-mode .mq-root-block{
+/* .mq-root-block, .mq-math-mode .mq-root-block{
     border: 1px solid #d9d9d9;
     max-width: 100% ;
     margin: 0;
-    padding: 4px 11px !important;
+    padding: 10px 11px !important;
     color: rgba(0, 0, 0, 0.88);
     font-size: 14px;
     line-height: 1.5714285714285714;
@@ -15,7 +15,6 @@
 
 .mq-editable-field, .mq-math-mode .mq-editable-field {
     width: 100%;
-
 }
 
 .mq-root-block{
@@ -48,7 +47,7 @@
 
 
 
-/* ***************** */
+
 
 :where(.css-dev-only-do-not-override-byeoj0).ant-collapse>.ant-collapse-item >.ant-collapse-header {
     align-items: flex-start;
@@ -72,13 +71,59 @@
 
 
 
+  */
+
+
+
+
+
+.mq-root-block{
+    min-height: 30px;
+    width: 100%;
+    display: flex !important;
+    align-items: center !important;
+    flex-wrap: wrap !important;
+
+}
+
+.mq-editable-field, .mq-math-mode .mq-editable-field {
+    width: 100%;
+}
+
+.mq-root-block, .mq-math-mode .mq-root-block{
+    border: 1px solid #d9d9d9;
+    padding: 10px 11px;
+    border-radius: 6px;
+    background-color: #fff;
+    transition: all 0.2s ease-in-out !important;
+}
+
+
+
+#math-display .mq-root-block,#math-display  .mq-math-mode .mq-root-block{
+    border: none;
+    background-color: transparent !important;
+    padding: 0 !important;
+    cursor: pointer;
+}
+
+#math-display .mq-root-block:hover{
+border: none !important;
+}
+#math-display .mq-root-block:active{
+box-shadow: none !important;
+}
+
+
+
+
 :where(.css-dev-only-do-not-override-byeoj0).ant-table-wrapper .ant-table-thead >tr>th:not(:last-child):not(.ant-table-selection-column):not(.ant-table-row-expand-icon-cell):not([colspan])::before, :where(.css-dev-only-do-not-override-byeoj0).ant-table-wrapper .ant-table-thead >tr>td:not(:last-child):not(.ant-table-selection-column):not(.ant-table-row-expand-icon-cell):not([colspan])::before {
     display: none;
 }
 
 .ant-form-item-label {
-    width: 70px; /* Adjust the width as needed */
-    text-align: left !important; /* Adjust alignment as needed */
+    width: 70px;
+    text-align: left !important; 
   }
 
   .ant-form-item-control {
@@ -102,4 +147,10 @@
     left: 11px;
     transform: translate(0,-50%);
     color: #bfbfbf;
+  }
+
+
+
+  .question-paper-math .mq-root-block{
+    font-size: 14px;
   }
