@@ -62,10 +62,10 @@ export default function AddQuestion() {
         formData.append("image", values.image[0].originFileObj);
       }
 
-      for (const entry of formData.entries()) {
-        const [fieldName, fieldValue] = entry;
-        console.log(`${fieldName}: ${fieldValue}`);
-      }
+      // for (const entry of formData.entries()) {
+      //   const [fieldName, fieldValue] = entry;
+      //   console.log(`${fieldName}: ${fieldValue}`);
+      // }
 
 
       try {
@@ -80,6 +80,7 @@ export default function AddQuestion() {
       } catch (error) {
         console.error("Error:", error);
         handleError();
+        setLoading(false)
       }
      
     };
@@ -141,7 +142,7 @@ export default function AddQuestion() {
                     autoCommands="pi theta sqrt sum prod alpha beta gamma rho int"
                     autoOperatorNames="sin cos tan"
                   />
-                    {!equation && (
+                  {!equation && (
                     <div className="equation-editor-placeholder">Type your equation here...</div>
                   )}
                 </div>
@@ -234,10 +235,10 @@ export default function AddQuestion() {
 
             <Form.Item name="image" valuePropName="fileList" getValueFromEvent={normFile}>
               <Upload 
-              action="/upload.do" 
+              action={`${baseURL}/questions`}
               listType="picture-card" 
               maxCount={1}
-              beforeUpload={(file) => false}
+              // beforeUpload={(file) => false}
               >
                 <div>
                   <PlusOutlined />

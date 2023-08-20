@@ -9,6 +9,7 @@ const { Text } = Typography;
 export default function QuestionPaper() {
   const location = useLocation();
   const data = location.state;
+  console.log(data);
   const questions = data.matchedQuestions
 
   return (
@@ -125,9 +126,8 @@ export default function QuestionPaper() {
           <Text>{question.mark} marks</Text>
           </div>
           <Divider className='line'/>
-          
-          <MathQuillStatic latex={question.question} />
-
+          {question.subject == "Maths" ? <MathQuillStatic className='question' latex={question.question} /> : <div className='question'>{question.question}</div>}
+            
           {question.imageSrc && <img className='question-img' src={baseURL+"/questions/getImage/"+question.imageSrc} alt="" />}
 
           {question.tableData && (

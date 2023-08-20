@@ -154,3 +154,7 @@ box-shadow: none !important;
   .question-paper-math .mq-root-block{
     font-size: 14px;
   }
+
+  :where(.css-byeoj0).ant-table-wrapper .ant-table-thead >tr>th:not(:last-child):not(.ant-table-selection-column):not(.ant-table-row-expand-icon-cell):not([colspan])::before, :where(.css-byeoj0).ant-table-wrapper .ant-table-thead >tr>td:not(:last-child):not(.ant-table-selection-column):not(.ant-table-row-expand-icon-cell):not([colspan])::before{
+    position: fixed;
+  }
