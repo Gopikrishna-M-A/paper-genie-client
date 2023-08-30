@@ -13,8 +13,10 @@ import {
   InputNumber,
   Select,
   Upload,
+  Modal,
+  Tooltip
 } from "antd";
-import { FileAddOutlined, PlusOutlined } from "@ant-design/icons";
+import { FileAddOutlined, PlusOutlined, InfoCircleOutlined } from "@ant-design/icons";
 import DynamicTableGenerator from "./DynamicTableGenerator";
 const { TextArea } = Input;
 const normFile = (e) => {
@@ -25,12 +27,14 @@ const normFile = (e) => {
 };
 
 export default function AddQuestion() {
+  const [showHelp, setShowHelp] = useState(false);
   const [equation, setEquation] = useState("");
   const [tableData, setTableData] = useState(null); // Add actual value
   const [rowCount, setRowCount] = useState(null); // Add actual value
   const [colCount, setColCount] = useState(null); // Add actual value
   const [subject, setSubject] = useState(null); // Add actual value
   const [loading, setLoading] = useState(false); // Add actual value
+
 
       const handleSuccess = () => {
         message.success('Question added successfully!');
@@ -146,6 +150,13 @@ export default function AddQuestion() {
                     <div className="equation-editor-placeholder">Type your equation here...</div>
                   )}
                 </div>
+                  <Button
+                    style={{ marginTop: "10px" }}
+                    onClick={() => setShowHelp(true)}
+                  >
+                   Formatting Guide <InfoCircleOutlined />
+                  </Button>
+                
               </Form.Item>
             ) : (
               <Form.Item 
@@ -163,6 +174,50 @@ export default function AddQuestion() {
                 />
               </Form.Item>
             )}
+            {showHelp && (
+      <Modal
+        title="Equation Editor Help"
+        open={showHelp}
+        onCancel={() => setShowHelp(false)}
+        footer={null}
+      >
+        <div className="equation-help-content">
+            <p>
+              Welcome to the Equation Editor! This tool helps you create math equations
+              with ease. Here's how you can use it:
+            </p>
+            <h3>Basic Commands:</h3>
+            <ul>
+              <li>Type <strong>sin</strong> for sine.</li>
+              <li>Type <strong>cos</strong> for cosine.</li>
+              <li>Type <strong>tan</strong> for tangent.</li>
+              <li>Type <strong>sqrt</strong> for square root.</li>
+              <li>Type <strong>pi</strong> for the π symbol.</li>
+              <li>Type <strong>theta</strong> for θ (theta).</li>
+              <li>Type <strong>sum</strong> for summation (∑).</li>
+              <li>Type <strong>prod</strong> for product (∏).</li>
+              <li>Type <strong>alpha</strong> for α (alpha).</li>
+              <li>Type <strong>beta</strong> for β (beta).</li>
+              <li>Type <strong>gamma</strong> for γ (gamma).</li>
+              <li>Type <strong>rho</strong> for ρ (rho).</li>
+              <li>Type <strong>int</strong> for integral (∫).</li>
+            </ul>
+            <h3>Subscripts and Superscripts:</h3>
+            <p>
+              To add subscripts, use <strong>_</strong> (e.g., x_1 for x subscript 1).
+              To add superscripts, use <strong>^</strong> (e.g., x^2 for x squared).
+            </p>
+            <h3>Using Mathematical Keywords:</h3>
+            <p>
+              Certain keywords like "choosing" include mathematical functions
+              or symbols within them. To differentiate them from regular text,
+              use a backslash (\) before the keyword. For example, typing
+              "\choosing" will keep the "sin" within "choosing" from being
+              treated as a function.
+            </p>
+          </div>
+      </Modal>
+    )}
 
             <Form.Item 
             name="Dlevel"
