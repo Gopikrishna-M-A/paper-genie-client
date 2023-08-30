@@ -1,3 +1,6 @@
+@import url('https://fonts.googleapis.com/css2?family=PT+Serif:wght@400;700&display=swap');
+
+
 /* .mq-root-block, .mq-math-mode .mq-root-block{
     border: 1px solid #d9d9d9;
     max-width: 100% ;
@@ -84,6 +87,11 @@
     align-items: center !important;
     flex-wrap: wrap !important;
 
+
+}
+.mq-math-mode var{
+    font-family: 'PT Serif', serif !important;
+    font-style: normal !important;
 }
 
 .mq-editable-field, .mq-math-mode .mq-editable-field {
@@ -161,4 +169,13 @@ box-shadow: none !important;
 
   :where(.css-byeoj0).ant-table-wrapper .ant-table-thead >tr>th:not(:last-child):not(.ant-table-selection-column):not(.ant-table-row-expand-icon-cell):not([colspan])::before, :where(.css-byeoj0).ant-table-wrapper .ant-table-thead >tr>td:not(:last-child):not(.ant-table-selection-column):not(.ant-table-row-expand-icon-cell):not([colspan])::before{
     position: fixed;
+  }
+
+
+
+
+  .question-paper-math .mq-root-block{
+    border: none;
+    background-color: transparent;
+    padding-left: 0;
   }

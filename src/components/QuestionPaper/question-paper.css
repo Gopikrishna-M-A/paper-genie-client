@@ -1,11 +1,16 @@
 @import url('https://fonts.googleapis.com/css2?family=PT+Serif:wght@400;700&display=swap');
 
 .first-page{
-    font-family: 'PT Serif', serif;
+
     background-color: #fff;
     font-size: 14px;
 }
-
+#a4{
+  font-family: 'PT Serif', serif ;
+}
+.antd-font{
+  font-family: 'PT Serif', serif !important;
+}
 
 .parent *{
     border-top: 1px solid black;
@@ -252,15 +257,44 @@
     width: 30%;
     margin-top: 10px;
   }
-  .question-table {
+  /* .question-table {
     margin-top: 10px;
     margin-bottom: 10px;
     width:fit-content;
     background-color: transparent;
     border-left: 1px solid black;
     border-right: 1px solid black;
+  } */
+
+  .question-table {
+    margin: 10px 0;
+    border-collapse: collapse;
+    width: 70%;
+    border: 1px solid black; /* Border style */
+    font-size: 14px;
   }
-  .question-table .ant-table-cell{
+  
+  .question-table th,
+  .question-table td {
+    border: 1px solid black; /* Border style */
+    padding: 8px; /* Cell padding */
+    text-align: left;
+  }
+  
+  .question-table th {
+    background-color: #f2f2f2; /* Header background color */
+  }
+  
+  .question-table tr:nth-child(even) {
+    background-color: #f2f2f2; /* Even row background color */
+  }
+  
+  
+
+
+
+
+  /* .question-table .ant-table-cell{
     border-color: black !important;
     border-right: 1px solid black;
   }
@@ -269,7 +303,7 @@
   }
   :where(.css-dev-only-do-not-override-byeoj0).ant-table-wrapper .ant-table-thead>tr>th, :where(.css-dev-only-do-not-override-byeoj0).ant-table-wrapper .ant-table-tbody>tr>th, :where(.css-dev-only-do-not-override-byeoj0).ant-table-wrapper .ant-table-tbody>tr>td, :where(.css-dev-only-do-not-override-byeoj0).ant-table-wrapper tfoot>tr>th, :where(.css-dev-only-do-not-override-byeoj0).ant-table-wrapper tfoot>tr>td {
     padding: 5px 10px !important;
-  }
+  } */
 
   .options{
     margin:20px 0 ;
@@ -295,3 +329,4 @@
         height: 75px;
     }
 }
+

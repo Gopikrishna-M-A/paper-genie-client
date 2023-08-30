@@ -1,38 +1,160 @@
-import React from 'react'
+/* eslint-disable react/no-danger-with-children */
+import React, {useEffect, useState} from 'react'
 import { useLocation } from 'react-router-dom';
-import { Divider, Table, Typography } from 'antd';
+import { Divider, Table, Typography, Button } from 'antd';
 import  "./question-paper.css"
 import { MathQuillStatic } from '../Common/MathQuillInput'
 import baseURL from '../baseURL'
+import EquationEditor from 'equation-editor-react';
+
+import html2pdf from 'html2pdf.js';
+
 
 const { Text } = Typography;
 export default function QuestionPaper() {
+  // const location = useLocation();
+  // const data = location.state;
+  // console.log(data);
+  // const questions = data.matchedQuestions
+
+  // const handleDownloadPDF = () => {
+  //   const printableHeight = 277; // Maximum height that can fit on a single A4 page (in mm)
+
+  //   const element = document.getElementById('a4'); // Element containing the questions
+  //   const options = {
+  //       margin: 10,
+  //       filename: 'question_paper.pdf',
+  //       image: { type: 'jpeg', quality: 0.98 }, // Image options
+  //       html2canvas: { scale: 2 }, // Html2canvas options
+  //       jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' } // jsPDF options
+  //   };
+
+  //   const divsPerPage = Math.ceil(element.clientHeight / printableHeight);
+  //   const pageCount = Math.ceil(element.children.length / divsPerPage);
+
+  //   const pages = [];
+  //   for (let i = 0; i < pageCount; i++) {
+  //       const start = i * divsPerPage;
+  //       const end = (i + 1) * divsPerPage;
+  //       const pageDivs = Array.from(element.children).slice(start, end);
+  //       const pageContent = document.createElement('div');
+  //       pageDivs.forEach(div => {
+  //           pageContent.appendChild(div.cloneNode(true));
+  //       });
+  //       pages.push(pageContent);
+  //   }
+
+  //   const pdf = html2pdf().set(options);
+
+  //   pages.forEach((page, index) => {
+  //       pdf.from(page).toPdf().output('datauristring').then((dataUri) => {
+  //           if (index === 0) {
+  //               pdf.output('dataurlnewwindow');
+  //           }
+  //       });
+  //   });
+  // };
+  
+
+  const [equationValue, setEquationValue] = useState(""); // State to store equation value
+
+  // Handle equation value change
+  const handleEquationChange = (newValue) => {
+    setEquationValue(newValue);
+  };
   const location = useLocation();
   const data = location.state;
-  console.log(data);
-  const questions = data.matchedQuestions
+  const questions = data.matchedQuestions;
+
+  const [imageData, setImageData] = useState([]);
+
+  useEffect(() => {
+    const fetchImageData = async () => {
+      const imagePromises = questions.map(async (question) => {
+        if (question.imageSrc) {
+          const response = await fetch(baseURL + "/questions/getImage/" + question.imageSrc);
+          const blob = await response.blob();
+          const base64data = await blobToBase64(blob);
+          return base64data;
+        }
+        return null;
+      });
+      const images = await Promise.all(imagePromises);
+      setImageData(images);
+    };
+
+    fetchImageData();
+  }, [questions]);
+
+  const blobToBase64 = (blob) => {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        resolve(reader.result);
+      };
+      reader.onerror = reject;
+      reader.readAsDataURL(blob);
+    });
+  };
+
+  const handleDownloadPDF = async () => {
+    const printableHeight = 277;
+    const element = document.getElementById('a4');
+    const options = {
+      margin: 10,
+      filename: 'question_paper.pdf',
+      image: { type: 'jpeg', quality: 0.98 },
+      html2canvas: { scale: 2 },
+      jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' },
+    };
+
+    const divsPerPage = Math.ceil(element.clientHeight / printableHeight);
+    const pageCount = Math.ceil(element.children.length / divsPerPage);
+
+    const pages = [];
+    for (let i = 0; i < pageCount; i++) {
+      const start = i * divsPerPage;
+      const end = (i + 1) * divsPerPage;
+      const pageDivs = Array.from(element.children).slice(start, end);
+      const pageContent = document.createElement('div');
+      pageDivs.forEach((div) => {
+        pageContent.appendChild(div.cloneNode(true));
+      });
+      pages.push(pageContent);
+    }
+
+    const pdf = html2pdf().set(options);
+
+    pages.forEach((page, index) => {
+      pdf.from(page).toPdf().output('datauristring').then((dataUri) => {
+        if (index === 0) {
+          pdf.output('dataurlnewwindow');
+        }
+      });
+    });
+  };
 
   return (
     <div className="Question-paper-section">
-      <div className="question-paper">
+      <div id='a4' className="question-paper">
 
         <div className="first-page">
           <div className="parent">
             <div className="logo">
               <img className="logo-img" src="/logo.png" alt="" />
             </div>
-            <div className="university">
+            <div className="university" contentEditable>
               University of Technology and Applied Sciences - Muscat
             </div>
-            <div className="department">DEPARTMENT: Information Technology</div>
+            <div className="department" contentEditable>DEPARTMENT: Information Technology</div>
             <div className="exam">
-              <h3 className="h-tag">Final Examination (Theory)</h3>
-              <h4 className="h-tag">Semester: 2 A. Y: 2022 / 2023</h4>
+              <h3 className="h-tag" contentEditable>Final Examination (Theory)</h3>
+              <h4 className="h-tag" contentEditable>Semester: 2 A. Y: 2022 / 2023</h4>
             </div>
             <div className="details">
-              <div className="detail">Date: 31-05-2023</div>
-              <div className="detail">Time: 02.30 PM- 05.00 PM</div>
-              <div className="detail">Version B</div>
+              <div className="detail" contentEditable>Date: 31-05-2023</div>
+              <div className="detail" contentEditable>Time: 02.30 PM- 05.00 PM</div>
+              <div className="detail" contentEditable>Version B</div>
             </div>
             <div className="student-name">Student Name</div>
             <div className="student-id">Student ID</div>
@@ -42,15 +164,15 @@ export default function QuestionPaper() {
             <div className="course-name">Course Name</div>
             <div className="course-code">Course Code</div>
             <div className="section">Section</div>
-            <div className="Advanced-diploma">Advanced Diploma</div>
-            <div className="probablity-stas">Probability and Statistics</div>
-            <div className="stat3101">STAT3101</div>
-            <div className="blank"></div>
-            <div className="blank2"></div>
-            <div className="blank3"></div>
-            <div className="blank4"></div>
-            <div className="blank5"></div>
-          </div>
+            <div className="Advanced-diploma" contentEditable>Advanced Diploma</div>
+            <div className="probablity-stas" contentEditable>Probability and Statistics</div>
+            <div className="stat3101" contentEditable>STAT3101</div>
+            <div className="blank" contentEditable></div>
+            <div className="blank2" contentEditable></div>
+            <div className="blank3" contentEditable></div>
+            <div className="blank4" contentEditable></div>
+            <div className="blank5" contentEditable></div>
+          </div> 
 
           <div className="instructions">
             <h4>INSTRUCTIONS TO STUDENTS:</h4>
@@ -85,52 +207,61 @@ export default function QuestionPaper() {
           </div>
 
           <div className="marks">
-            <div className="section-">Section</div>
-            <div className="max-marks">Max. Marks</div>
-            <div className="obtained-marks">Obtained Marks</div>
-            <div className="A">A</div>
-            <div className="B">B</div>
-            <div className="ten">10</div>
-            <div className="twenty">20</div>
-            <div className="blank1"></div>
-            <div className="blank2"></div>
-            <div className="sub-total-marks">Sub-Total Marks</div>
-            <div className="grand-total-marks">Grand Total Marks</div>
-            <div className="black3"></div>
-            <div className="blank4"></div>
-            <div className="thirty">30</div>
-            <div className="blank5"></div>
+            <div contentEditable className="section-">Section</div>
+            <div contentEditable className="max-marks">Max. Marks</div>
+            <div contentEditable className="obtained-marks">Obtained Marks</div>
+            <div contentEditable className="A">A</div>
+            <div contentEditable className="B">B</div>
+            <div contentEditable className="ten">10</div>
+            <div contentEditable className="twenty">20</div>
+            <div contentEditable className="blank1"></div>
+            <div contentEditable className="blank2"></div>
+            <div contentEditable className="sub-total-marks">Sub-Total Marks</div>
+            <div contentEditable className="grand-total-marks">Grand Total Marks</div>
+            <div contentEditable className="black3"></div>
+            <div contentEditable className="blank4"></div>
+            <div contentEditable className="thirty">30</div>
+            <div contentEditable className="blank5"></div>
           </div>
 
           <div className="student-sec">
             <div className="sec">
-              <div className="marker">First Marker :</div>
-              <div className="sign">Signature :</div>
-              <div className="Date">Date :</div>
+              <div contentEditable className="marker">First Marker :</div>
+              <div contentEditable className="sign">Signature :</div>
+              <div contentEditable className="Date">Date :</div>
             </div>
             <div className="sec">
-              <div className="marker">Second Marker :</div>
-              <div className="sign">Signature :</div>
-              <div className="Date">Date :</div>
+              <div contentEditable className="marker">Second Marker :</div>
+              <div contentEditable className="sign">Signature :</div>
+              <div contentEditable className="Date">Date :</div>
             </div>
           </div>
         </div>
 
-        <div style={{margin:"100px 0px"}}></div>
+        <div style={{margin:"100px 0px",marginTop:"120px"}}></div>
 
         {questions.map((question, index) => (
           <div className='question-paper-math' key={index}>
           <Divider className='line'/>
-          <div className='qusetion-head'>
-          <Text>Question {index + 1}</Text>
-          <Text>{question.mark} marks</Text>
+          <div contentEditable className='qusetion-head'>
+          <Text className='antd-font'>Question {index + 1}</Text>
+          <Text className='antd-font'>{question.mark} marks</Text>
           </div>
           <Divider className='line'/>
-          {question.subject == "Maths" ? <MathQuillStatic className='question' latex={question.question} /> : <div className='question'>{question.question}</div>}
+          
+          {question.subject == "Maths" ? <EquationEditor value={question.question} onChange={handleEquationChange} autoCommands="pi theta sqrt sum prod alpha beta gamma rho int" autoOperatorNames="sin cos tan"/>: <div contentEditable className='question'>{question.question}</div>}
             
-          {question.imageSrc && <img className='question-img' src={baseURL+"/questions/getImage/"+question.imageSrc} alt="" />}
+          {/* {question.imageSrc && <img className='question-img' src={baseURL+"/questions/getImage/"+question.imageSrc} alt="" />} */}
+          {question.imageSrc && (
+            <img
+              className='question-img'
+              src={imageData[index]} // Use base64 data from imageData
+              alt=''
+              data-index={index} // Set data-index attribute to match with imageData
+            />
+          )}
 
-          {question.tableData && (
+          {/* {question.tableData && (
           <Table 
             className='question-table'
             rowKey="id"
@@ -141,13 +272,27 @@ export default function QuestionPaper() {
             ]}
             pagination={false}
             />
-          )}
+          )} */}
 
-          <div className="options">
-          {question.opta && <Text>Option A: {question.opta}</Text>}
-          {question.optb && <Text>Option B: {question.optb}</Text>}
-          {question.optc && <Text>Option C: {question.optc}</Text>}
-          {question.optd && <Text>Option D: {question.optd}</Text>}
+
+            {question.tableData && (
+              <table contentEditable className='question-table'>
+                <tbody>
+                  {JSON.parse(question.tableData).map((row, rowIndex) => (
+                    <tr key={rowIndex}>
+                      <td>{row.col0}</td>
+                      <td>{row.col1}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            )}
+
+          <div className="options" contentEditable >
+          {question.opta && <Text  className='antd-font'>Option A: {question.opta}</Text>}
+          {question.optb && <Text  className='antd-font'>Option B: {question.optb}</Text>}
+          {question.optc && <Text  className='antd-font'>Option C: {question.optc}</Text>}
+          {question.optd && <Text  className='antd-font'>Option D: {question.optd}</Text>}
           </div>
 
           <Divider className='line'/>
@@ -158,7 +303,10 @@ export default function QuestionPaper() {
 
           </div>
         ))}
+
+
       </div>
+      <Button onClick={handleDownloadPDF}>Download</Button>
     </div>
   );
 }
