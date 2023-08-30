@@ -1,9 +1,9 @@
 /* eslint-disable react/no-danger-with-children */
 import React, {useEffect, useState} from 'react'
 import { useLocation } from 'react-router-dom';
-import { Divider, Table, Typography, Button } from 'antd';
+import { Divider, Tag, Typography, Tooltip, Button } from 'antd';
 import  "./question-paper.css"
-import { MathQuillStatic } from '../Common/MathQuillInput'
+import { DownloadOutlined } from '@ant-design/icons';
 import baseURL from '../baseURL'
 import EquationEditor from 'equation-editor-react';
 
@@ -57,16 +57,28 @@ export default function QuestionPaper() {
   
 
   const [equationValue, setEquationValue] = useState(""); // State to store equation value
-
-  // Handle equation value change
-  const handleEquationChange = (newValue) => {
-    setEquationValue(newValue);
-  };
+  const [isSmallScreen, setIsSmallScreen] = useState(false);
   const location = useLocation();
   const data = location.state;
   const questions = data.matchedQuestions;
 
   const [imageData, setImageData] = useState([]);
+
+  useEffect(() => {
+    // Add event listener to update the state when the window size changes
+    const handleResize = () => {
+      setIsSmallScreen(window.innerWidth < 600);
+    };
+
+    // Initial check and add listener
+    handleResize();
+    window.addEventListener('resize', handleResize);
+
+    // Cleanup by removing event listener
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
 
   useEffect(() => {
     const fetchImageData = async () => {
@@ -85,6 +97,13 @@ export default function QuestionPaper() {
 
     fetchImageData();
   }, [questions]);
+
+
+  // Handle equation value change
+  const handleEquationChange = (newValue) => {
+    setEquationValue(newValue);
+  };
+
 
   const blobToBase64 = (blob) => {
     return new Promise((resolve, reject) => {
@@ -306,7 +325,21 @@ export default function QuestionPaper() {
 
 
       </div>
-      <Button onClick={handleDownloadPDF}>Download</Button>
+
+      <Tooltip
+      title={isSmallScreen ? "Download not available on small screens" : ""}
+      placement="top"
+      trigger={isSmallScreen ? "hover" : []}
+    >
+      <Button
+        onClick={handleDownloadPDF}
+        disabled={isSmallScreen}
+        block
+        icon={<DownloadOutlined />}
+      >
+        Download
+      </Button>
+    </Tooltip>
     </div>
   );
 }
