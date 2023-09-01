@@ -8,7 +8,7 @@ import baseURL from '../baseURL'
 
 const { Text } = Typography;
 
-export default function GeneratePaper() {
+export default function GeneratePaper({user}) {
 
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
@@ -16,7 +16,9 @@ export default function GeneratePaper() {
   const [ subject,setSubject] = useState()
   const [ section,setSection] = useState()
 
-
+  if(!user){
+    message.warning('Please log in to generate paper.');
+  }
   useEffect(() => {
     // Fetch data based on the selected subject
     if (subject) {
@@ -29,7 +31,10 @@ export default function GeneratePaper() {
 
   const fetchSubTopics = async (selectedSubject) => {
     try {
-      const response = await fetch(`${baseURL}/questions/subject/${selectedSubject}`);
+      const response = await fetch(`${baseURL}/questions/subject/${selectedSubject}`,{
+        method: 'GET',
+        credentials: 'include'
+      });
       if (response.ok) {
         const data = await response.json();
         const sec = new Set();
@@ -80,6 +85,7 @@ export default function GeneratePaper() {
     try {
       const response = await fetch(`${baseURL}/questions/filter`, {
         method: 'POST',
+        credentials: 'include',
         headers: {
           'Content-Type': 'application/json',
         },
@@ -135,9 +141,11 @@ export default function GeneratePaper() {
         <Select 
         placeholder="Subject"
         onChange={(value) => setSubject(value)}>
-             <Select.Option value="Maths">Maths</Select.Option>
-             <Select.Option value="Science">Science</Select.Option>
-             <Select.Option value="English">English</Select.Option>
+              {user && user.subjects && Object.keys(user.subjects).map((subjectName) => (
+                <Select.Option key={subjectName} value={subjectName}>
+                  {subjectName}
+                </Select.Option>
+              ))}
          </Select>
 
         

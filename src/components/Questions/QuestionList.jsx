@@ -5,13 +5,14 @@ import EditForm from './EditForm';
 import baseURL from '../baseURL'
 import "../Common/eq1.css"
 import "../Common/eq2.css"
-const QuestionList = ({ subject, setSubject }) => {
+const QuestionList = ({ subject, setSubject, user }) => {
+
   const [questions, setQuestions] = useState([]);
   const [editModalVisible, setEditModalVisible] = useState(false);
   const [loading, setLoading] = useState(true); 
   const [questionId, setQuestionId] = useState()
 
-  
+  const subjectType = user.subjects[subject];
 
   const handleSuccess = (msg) => {
     message.success(msg);
@@ -25,7 +26,10 @@ const QuestionList = ({ subject, setSubject }) => {
     const fetchQuestions = async () => {
         try {
             setLoading(true)
-            const response = await fetch(`${baseURL}/questions/subject/${subject}`);
+            const response = await fetch(`${baseURL}/questions/subject/${subject}`,{
+              method: 'GET',
+              credentials: 'include'
+            });
             if (response.ok) {
               const data = await response.json();
               setQuestions(data);
@@ -46,7 +50,10 @@ const QuestionList = ({ subject, setSubject }) => {
     const fetchQuestions = async () => {
         try {
             setLoading(true)
-            const response = await fetch(`${baseURL}/questions/subject/${subject}`);
+            const response = await fetch(`${baseURL}/questions/subject/${subject}`,{
+              method: 'GET',
+              credentials: 'include'
+            });
             if (response.ok) {
               const data = await response.json();
               setQuestions(data);
@@ -73,6 +80,7 @@ const QuestionList = ({ subject, setSubject }) => {
           try {
             const response = await fetch(`${baseURL}/questions/${id}`, {
               method: 'DELETE',
+              credentials: 'include'
             });
 
             if (response.status === 200) {
@@ -96,6 +104,7 @@ const QuestionList = ({ subject, setSubject }) => {
     try {
         const response = await fetch(`${baseURL}/questions/${questionId}`, {
           method: 'PATCH',
+          credentials: 'include',
           headers: {
             'Content-Type': 'application/json',
           },
@@ -150,7 +159,7 @@ const QuestionList = ({ subject, setSubject }) => {
             items={[
               {
                 key: q._id,
-                label: subject === "Maths" ? (
+                label: subjectType === "math" ? (
                   <MathQuillStatic latex={q.question} />
                 ) : (
                   q.question
@@ -170,7 +179,7 @@ const QuestionList = ({ subject, setSubject }) => {
                     }
                       > Edit </Button>
                     <Button onClick={() => handleDelete(q._id)} style={{marginLeft:"10px"}} size="small" type="primary"> Delete </Button>
-                    <EditForm visible={editModalVisible} onCancel={() => setEditModalVisible(false)} onEdit={handleEdit} subject={subject}/>
+                    <EditForm user={user} visible={editModalVisible} onCancel={() => setEditModalVisible(false)} onEdit={handleEdit} subject={subject}/>
                   </div> 
                 ),
               },

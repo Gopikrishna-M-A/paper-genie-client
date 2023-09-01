@@ -163,7 +163,7 @@ box-shadow: none !important;
 
 
 
-  .question-paper-math .mq-root-block{
+  .middle-part .mq-root-block{
     font-size: 14px;
   }
 
@@ -174,7 +174,7 @@ box-shadow: none !important;
 
 
 
-  .question-paper-math .mq-root-block{
+  .middle-part .mq-root-block{
     border: none;
     background-color: transparent;
     padding-left: 0;

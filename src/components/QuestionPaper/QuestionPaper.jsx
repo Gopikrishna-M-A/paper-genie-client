@@ -11,49 +11,7 @@ import html2pdf from 'html2pdf.js';
 
 
 const { Text } = Typography;
-export default function QuestionPaper() {
-  // const location = useLocation();
-  // const data = location.state;
-  // console.log(data);
-  // const questions = data.matchedQuestions
-
-  // const handleDownloadPDF = () => {
-  //   const printableHeight = 277; // Maximum height that can fit on a single A4 page (in mm)
-
-  //   const element = document.getElementById('a4'); // Element containing the questions
-  //   const options = {
-  //       margin: 10,
-  //       filename: 'question_paper.pdf',
-  //       image: { type: 'jpeg', quality: 0.98 }, // Image options
-  //       html2canvas: { scale: 2 }, // Html2canvas options
-  //       jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' } // jsPDF options
-  //   };
-
-  //   const divsPerPage = Math.ceil(element.clientHeight / printableHeight);
-  //   const pageCount = Math.ceil(element.children.length / divsPerPage);
-
-  //   const pages = [];
-  //   for (let i = 0; i < pageCount; i++) {
-  //       const start = i * divsPerPage;
-  //       const end = (i + 1) * divsPerPage;
-  //       const pageDivs = Array.from(element.children).slice(start, end);
-  //       const pageContent = document.createElement('div');
-  //       pageDivs.forEach(div => {
-  //           pageContent.appendChild(div.cloneNode(true));
-  //       });
-  //       pages.push(pageContent);
-  //   }
-
-  //   const pdf = html2pdf().set(options);
-
-  //   pages.forEach((page, index) => {
-  //       pdf.from(page).toPdf().output('datauristring').then((dataUri) => {
-  //           if (index === 0) {
-  //               pdf.output('dataurlnewwindow');
-  //           }
-  //       });
-  //   });
-  // };
+export default function QuestionPaper({user}) {
   
 
   const [equationValue, setEquationValue] = useState(""); // State to store equation value
@@ -61,7 +19,6 @@ export default function QuestionPaper() {
   const location = useLocation();
   const data = location.state;
   const questions = data.matchedQuestions;
-
   const [imageData, setImageData] = useState([]);
 
   useEffect(() => {
@@ -126,200 +83,142 @@ export default function QuestionPaper() {
       html2canvas: { scale: 2 },
       jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' },
     };
-
-    const divsPerPage = Math.ceil(element.clientHeight / printableHeight);
-    const pageCount = Math.ceil(element.children.length / divsPerPage);
-
-    const pages = [];
-    for (let i = 0; i < pageCount; i++) {
-      const start = i * divsPerPage;
-      const end = (i + 1) * divsPerPage;
-      const pageDivs = Array.from(element.children).slice(start, end);
-      const pageContent = document.createElement('div');
-      pageDivs.forEach((div) => {
-        pageContent.appendChild(div.cloneNode(true));
+  
+    // Calculate the total height of content, including the first question-box
+    const totalContentHeight = calculateTotalContentHeight(element);
+  
+    // Determine if it can fit within a single page
+    if (totalContentHeight <= printableHeight) {
+      // Generate a single-page PDF with all content
+      const pdf = html2pdf().set(options);
+      pdf.from(element).toPdf().output('datauristring').then((dataUri) => {
+        pdf.output('dataurlnewwindow');
       });
-      pages.push(pageContent);
+    } else {
+      // Calculate how many pages are needed
+      const pageCount = Math.ceil(totalContentHeight / printableHeight);
+  
+      // Generate multi-page PDFs, ensuring the first question-box is on the first page
+      for (let i = 0; i < pageCount; i++) {
+        const start = i * printableHeight;
+        const end = (i + 1) * printableHeight;
+  
+        // Create a new element for each page
+        const pageContent = document.createElement('div');
+        const pageDivs = Array.from(element.children).slice(start, end);
+        pageDivs.forEach((div) => {
+          pageContent.appendChild(div.cloneNode(true));
+        });
+  
+        // Generate PDF for this page
+        const pdf = html2pdf().set(options);
+        pdf.from(pageContent).toPdf().output('datauristring').then((dataUri) => {
+          if (i === 0) {
+            pdf.output('dataurlnewwindow');
+          }
+        });
+      }
     }
-
-    const pdf = html2pdf().set(options);
-
-    pages.forEach((page, index) => {
-      pdf.from(page).toPdf().output('datauristring').then((dataUri) => {
-        if (index === 0) {
-          pdf.output('dataurlnewwindow');
-        }
-      });
+  };
+  
+  const calculateTotalContentHeight = (element) => {
+    // Calculate the total height of content, including the first question-box
+    let totalHeight = 0;
+    Array.from(element.children).forEach((child) => {
+      totalHeight += child.clientHeight;
     });
+    return totalHeight;
   };
 
   return (
     <div className="Question-paper-section">
       <div id='a4' className="question-paper">
 
-        <div className="first-page">
-          <div className="parent">
-            <div className="logo">
-              <img className="logo-img" src="/logo.png" alt="" />
-            </div>
-            <div className="university" contentEditable>
-              University of Technology and Applied Sciences - Muscat
-            </div>
-            <div className="department" contentEditable>DEPARTMENT: Information Technology</div>
-            <div className="exam">
-              <h3 className="h-tag" contentEditable>Final Examination (Theory)</h3>
-              <h4 className="h-tag" contentEditable>Semester: 2 A. Y: 2022 / 2023</h4>
-            </div>
-            <div className="details">
-              <div className="detail" contentEditable>Date: 31-05-2023</div>
-              <div className="detail" contentEditable>Time: 02.30 PM- 05.00 PM</div>
-              <div className="detail" contentEditable>Version B</div>
-            </div>
-            <div className="student-name">Student Name</div>
-            <div className="student-id">Student ID</div>
-            <div className="specialization">Specialization</div>
-            <div className="invi-sign">Invigilator Signature</div>
-            <div className="level">Level</div>
-            <div className="course-name">Course Name</div>
-            <div className="course-code">Course Code</div>
-            <div className="section">Section</div>
-            <div className="Advanced-diploma" contentEditable>Advanced Diploma</div>
-            <div className="probablity-stas" contentEditable>Probability and Statistics</div>
-            <div className="stat3101" contentEditable>STAT3101</div>
-            <div className="blank" contentEditable></div>
-            <div className="blank2" contentEditable></div>
-            <div className="blank3" contentEditable></div>
-            <div className="blank4" contentEditable></div>
-            <div className="blank5" contentEditable></div>
-          </div> 
 
-          <div className="instructions">
-            <h4>INSTRUCTIONS TO STUDENTS:</h4>
-            <ol>
-              <li>
-                Do not open this question paper until told to do so by the
-                invigilator.
-              </li>
-              <li>
-                This exam paper consists of (12) pages including the front page
-                and the statistical table.
-              </li>
-              <li>Time allowed is 1 hour 30 minutes.</li>
-              <li>
-                Cheating / malpractice in any form will be dealt as an offence.{" "}
-              </li>
-              <li>
-                Use only Black or Blue pen for answering the questions. However,
-                pencils can be used for diagrams, problem solving and program
-                writing purposes only.{" "}
-              </li>
-              <li>Exchanging or sharing of resources is prohibited.</li>
-              <li>
-                Use of mobile phones, Bluetooth, smart watches, dictionary, or
-                any translator gadget in the examination hall is not allowed.
-              </li>
-              <li>
-                Non programmable calculators are ☑ allowed/   not allowed to be
-                used.
-              </li>
-            </ol>
-          </div>
+        <div style={{marginTop:"10px"}}></div>
 
-          <div className="marks">
-            <div contentEditable className="section-">Section</div>
-            <div contentEditable className="max-marks">Max. Marks</div>
-            <div contentEditable className="obtained-marks">Obtained Marks</div>
-            <div contentEditable className="A">A</div>
-            <div contentEditable className="B">B</div>
-            <div contentEditable className="ten">10</div>
-            <div contentEditable className="twenty">20</div>
-            <div contentEditable className="blank1"></div>
-            <div contentEditable className="blank2"></div>
-            <div contentEditable className="sub-total-marks">Sub-Total Marks</div>
-            <div contentEditable className="grand-total-marks">Grand Total Marks</div>
-            <div contentEditable className="black3"></div>
-            <div contentEditable className="blank4"></div>
-            <div contentEditable className="thirty">30</div>
-            <div contentEditable className="blank5"></div>
-          </div>
-
-          <div className="student-sec">
-            <div className="sec">
-              <div contentEditable className="marker">First Marker :</div>
-              <div contentEditable className="sign">Signature :</div>
-              <div contentEditable className="Date">Date :</div>
-            </div>
-            <div className="sec">
-              <div contentEditable className="marker">Second Marker :</div>
-              <div contentEditable className="sign">Signature :</div>
-              <div contentEditable className="Date">Date :</div>
-            </div>
+        <div className="question-box first">
+          <div className="left-part">Sno</div>
+          <div className="middle-part first">Questions</div>
+          <div className="right-part">
+            <table className="question-spec">
+              <tr>
+                <td>Difficulty level</td>
+                <td>Cognitive level</td>
+                <td>Section</td>
+                <td>Mark</td>
+              </tr>
+            </table>
           </div>
         </div>
 
-        <div style={{margin:"100px 0px",marginTop:"120px"}}></div>
+        
 
         {questions.map((question, index) => (
-          <div className='question-paper-math' key={index}>
-          <Divider className='line'/>
-          <div contentEditable className='qusetion-head'>
-          <Text className='antd-font'>Question {index + 1}</Text>
-          <Text className='antd-font'>{question.mark} marks</Text>
-          </div>
-          <Divider className='line'/>
-          
-          {question.subject == "Maths" ? <EquationEditor value={question.question} onChange={handleEquationChange} autoCommands="pi theta sqrt sum prod alpha beta gamma rho int" autoOperatorNames="sin cos tan"/>: <div contentEditable className='question'>{question.question}</div>}
+
+
+          <div key={index} className="question-box">
+            <div className="left-part">
+              <div>
+                {index + 1}
+              </div>
+            </div>
+            <div className="middle-part">
+  
+                  { user.subjects[question.subject] == "math" ? <EquationEditor value={question.question} onChange={handleEquationChange} autoCommands="pi theta sqrt sum prod alpha beta gamma rho int" autoOperatorNames="sin cos tan"/>: <div contentEditable className='question'>{question.question}</div>}
+
+                  {question.imageSrc && (
+                    <img
+                      className='question-img'
+                      src={imageData[index]} // Use base64 data from imageData
+                      alt=''
+                      data-index={index} // Set data-index attribute to match with imageData
+                    />
+                  )}
+
+                  {question.tableData && (
+                    <table contentEditable className='question-table'>
+                      <tbody>
+                        {JSON.parse(question.tableData).map((row, rowIndex) => (
+                          <tr key={rowIndex}>
+                            <td>{row.col0}</td>
+                            <td>{row.col1}</td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
+                  )}
+
+                  <div className="options"  >
+                  {question.opta && <Text  className='antd-font'>Option A: {question.opta}</Text>}
+                  {question.optb && <Text  className='antd-font'>Option B: {question.optb}</Text>}
+                  {question.optc && <Text  className='antd-font'>Option C: {question.optc}</Text>}
+                  {question.optd && <Text  className='antd-font'>Option D: {question.optd}</Text>}
+                  </div>
+  
+              </div>
+  
             
-          {/* {question.imageSrc && <img className='question-img' src={baseURL+"/questions/getImage/"+question.imageSrc} alt="" />} */}
-          {question.imageSrc && (
-            <img
-              className='question-img'
-              src={imageData[index]} // Use base64 data from imageData
-              alt=''
-              data-index={index} // Set data-index attribute to match with imageData
-            />
-          )}
-
-          {/* {question.tableData && (
-          <Table 
-            className='question-table'
-            rowKey="id"
-            dataSource={JSON.parse(question.tableData)}
-            columns={[
-              { dataIndex: 'col0', key: 'col0' },
-              { dataIndex: 'col1', key: 'col1' },
-            ]}
-            pagination={false}
-            />
-          )} */}
-
-
-            {question.tableData && (
-              <table contentEditable className='question-table'>
-                <tbody>
-                  {JSON.parse(question.tableData).map((row, rowIndex) => (
-                    <tr key={rowIndex}>
-                      <td>{row.col0}</td>
-                      <td>{row.col1}</td>
-                    </tr>
-                  ))}
-                </tbody>
+            <div className="right-part">
+              <table className="question-spec">
+                <tr>
+                  <td>
+                    {question.Dlevel}
+                  </td>
+                  <td>
+                  {question.Clevel}
+                  </td>
+                  <td>
+                  {question.section}
+                  </td>
+                  <td>
+                  {question.mark}
+                  </td>
+                </tr>
               </table>
-            )}
-
-          <div className="options" contentEditable >
-          {question.opta && <Text  className='antd-font'>Option A: {question.opta}</Text>}
-          {question.optb && <Text  className='antd-font'>Option B: {question.optb}</Text>}
-          {question.optc && <Text  className='antd-font'>Option C: {question.optc}</Text>}
-          {question.optd && <Text  className='antd-font'>Option D: {question.optd}</Text>}
-          </div>
-
-          <Divider className='line'/>
-
-          {[...Array(question.space)].map((_, spaceIndex) => (
-            <Divider key={spaceIndex} dashed />
-          ))}
-
+            </div>
+  
+  
           </div>
         ))}
 
@@ -332,6 +231,7 @@ export default function QuestionPaper() {
       trigger={isSmallScreen ? "hover" : []}
     >
       <Button
+        style={{marginTop:"10px"}}
         onClick={handleDownloadPDF}
         disabled={isSmallScreen}
         block

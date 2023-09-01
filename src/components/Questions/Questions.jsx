@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import SectionHead from '../Common/SectionHead'
 import { EditOutlined  } from '@ant-design/icons';
-import { Select } from 'antd';
+import { Select, message } from 'antd';
 import QuestionList from './QuestionList'
 
  
@@ -9,13 +9,17 @@ const { Option } = Select;
 
 
 
-export default function Questions() {
+export default function Questions({user}) {
 
   const [selectedSubject, setSelectedSubject] = useState(null);
   const handleSubjectChange = (value) => {
     setSelectedSubject(value);
   };
 
+
+  if(!user){
+    message.warning('Please log in to view questions..');
+  }
   
   return (
       <div className="Questions-section">
@@ -28,12 +32,14 @@ export default function Questions() {
       style={{marginTop:"10px"}}
       placeholder="Select a subject" 
       onChange={handleSubjectChange}>
-        <Option value="English">English</Option>
-        <Option value="Maths">Maths</Option>
-        <Option value="Science">Science</Option>
+              {user && user.subjects && Object.keys(user.subjects).map((subjectName) => (
+                <Select.Option key={subjectName} value={subjectName}>
+                  {subjectName}
+                </Select.Option>
+              ))}
       </Select>
 
-      <QuestionList subject={selectedSubject} setSubject={setSelectedSubject} />
+      <QuestionList user={user} subject={selectedSubject} setSubject={setSelectedSubject} />
 
     
 

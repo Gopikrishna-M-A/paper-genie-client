@@ -22,11 +22,11 @@ html {
 }
 
 .nav-left-sec{
-    width: fit-content;
     display: flex;
     justify-content: center;
     align-items: center;
     gap: 10px;
+    width: 100%;
 }
 
 .nav__collapser {
@@ -64,8 +64,49 @@ html {
     padding: 2rem 0;
 }
 
+
+.profile-small{
+    display: none;
+}
+
+.nav-content-wrapper{
+    display: flex;
+    gap: 10px;
+    width: 100%;
+    justify-content: space-between;
+}
+.nav-content-wrapper *{
+    width: fit-content;
+}
+
+
+
+.nav-left-sec .ant-btn-compact-first-item{
+    display: none;
+}
+
+
+.nav-left-sec .ant-btn-compact-last-item{
+    border-radius: 6px !important;
+}
+
+
+@media (width < 700px){
+    .profile-small{
+        display: inline;
+    }
+    .profile-big{
+        display: none;
+    }
+}
+
 /* Desktop mode styles */
 @media (min-width: 700px) {
+
+    .nav-left-sec{
+        width: fit-content;
+
+    }
     .nav {
         padding-left: 40px;
         padding-right: 40px;

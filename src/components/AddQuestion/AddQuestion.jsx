@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import SectionHead from "../Common/SectionHead";
 import "../Common/math.css";
 import axios from "axios";
@@ -26,7 +27,8 @@ const normFile = (e) => {
   return e?.fileList;
 };
 
-export default function AddQuestion() {
+export default function AddQuestion({user}) {
+  const navigate = useNavigate();
   const [showHelp, setShowHelp] = useState(false);
   const [equation, setEquation] = useState("");
   const [tableData, setTableData] = useState(null); // Add actual value
@@ -34,7 +36,7 @@ export default function AddQuestion() {
   const [colCount, setColCount] = useState(null); // Add actual value
   const [subject, setSubject] = useState(null); // Add actual value
   const [loading, setLoading] = useState(false); // Add actual value
-
+  const subjectType = user.subjects[subject];
 
       const handleSuccess = () => {
         message.success('Question added successfully!');
@@ -43,6 +45,12 @@ export default function AddQuestion() {
       const handleError = () => {
         message.error('Failed to add question. Please try again.');
       };
+
+      if(!user){
+        message.warning('Please log in to add a question.');
+      }
+    
+    
 
     const handleSubmit = async (values) => {
       setLoading(true)
@@ -71,20 +79,26 @@ export default function AddQuestion() {
       //   console.log(`${fieldName}: ${fieldValue}`);
       // }
 
-
+      
       try {
         const response = await axios.post(`${baseURL}/questions`, formData, {
+          withCredentials: true,
           headers: {
             "Content-Type": "multipart/form-data", // Set content type to multipart/form-data
           },
         });
-        console.log("Response data:", response.data);
+
+        console.log("Response data:", response.data)
         handleSuccess();
         setLoading(false)
       } catch (error) {
         console.error("Error:", error);
         handleError();
         setLoading(false)
+
+        if (error.response && error.response.status === 401) {
+            navigate("/login");
+        }
       }
      
     };
@@ -131,13 +145,15 @@ export default function AddQuestion() {
                 placeholder="Subject"
                 onChange={(value) => setSubject(value)}
               >
-                <Select.Option value="Maths">Maths</Select.Option>
-                <Select.Option value="English">English</Select.Option>
-                <Select.Option value="Science">Science</Select.Option>
+              {user && user.subjects && Object.keys(user.subjects).map((subjectName) => (
+                <Select.Option key={subjectName} value={subjectName}>
+                  {subjectName}
+                </Select.Option>
+              ))}
               </Select>
             </Form.Item>
 
-            {subject === "Maths" ? (
+            {subjectType === "math" ? (
               <Form.Item >
                 <div className="equation-editor-container">
                   <EquationEditor

@@ -1,9 +1,9 @@
-import React from 'react'
+import React, { useRef } from 'react'
 import { Link } from "react-router-dom";
 import { Button, ConfigProvider } from 'antd';
 import { ArrowRightOutlined } from '@ant-design/icons';
 
-export default function Card({ icon, title, text, link }) {
+export default function Card({ icon, title, text, link, cardRef }) {
   return (
     <ConfigProvider
       theme={{
@@ -15,7 +15,7 @@ export default function Card({ icon, title, text, link }) {
         },
       }}
     >
-      <div className='Home-Card'>
+      <div ref={cardRef}  className='Home-Card'>
         <div className='Home-card-head'>
         { icon && React.cloneElement(icon, { className: 'Home-card-head-icon' }) }
         <div className="Home-card-title">{ title }</div>

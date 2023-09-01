@@ -3,9 +3,10 @@ import { Modal, Form, Button, Input, Select, InputNumber } from 'antd';
 import EquationEditor from 'equation-editor-react';
 const { TextArea } = Input;
 
-const EditForm = ({ visible, onCancel, onEdit, subject }) => {
+const EditForm = ({ visible, onCancel, onEdit, subject, user }) => {
   const [question, setQuestion] = useState()
   const [editedValues, setEditedValues] = useState({});
+  const subjectType = user.subjects[subject];
   useEffect(() => {
     // Reset the question and editedValues states when the modal is opened
     setQuestion('')
@@ -43,7 +44,7 @@ const EditForm = ({ visible, onCancel, onEdit, subject }) => {
         {/* Add form fields for editing */}
 
 
-            {subject === "Maths" ? (
+            {subjectType === "math" ? (
                 <Form.Item label="Question" >
                   <div className="equation-editor-container">
                   <EquationEditor

@@ -1,10 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=PT+Serif:wght@400;700&display=swap');
 
-.first-page{
-
-    background-color: #fff;
-    font-size: 14px;
-}
 #a4{
   font-family: 'PT Serif', serif ;
 }
@@ -245,7 +240,7 @@
     margin-top: 5px;
   }
 
-  :where(.css-dev-only-do-not-override-byeoj0).ant-divider-horizontal {
+  .ant-divider-horizontal {
     border-color: black !important;
   }
   .question{
@@ -270,14 +265,14 @@
     margin: 10px 0;
     border-collapse: collapse;
     width: 70%;
-    border: 1px solid black; /* Border style */
+    border: .5px solid black; /* Border style */
     font-size: 14px;
   }
   
   .question-table th,
   .question-table td {
-    border: 1px solid black; /* Border style */
-    padding: 8px; /* Cell padding */
+    border: .5px solid black; /* Border style */
+    padding: 8px; 
     text-align: left;
   }
   
@@ -318,6 +313,64 @@
   }
 
 
+
+  .question-box{
+    background-color: #fff;
+    display: flex;
+    border-top: 1px solid black;
+    border-left: 1px solid black;
+    border-right: 1px solid black;
+    }
+    .question-box:last-child{
+        border: 1px solid black;
+    }
+
+    .left-part{
+        font-size: 14px;
+        width: 10%;
+        display: flex;
+        align-items:center ;
+        justify-content:center ;
+        border-right: 1px solid black;
+    }
+    .middle-part{
+        font-size: 14px;
+        padding-left: 10px;
+        padding-bottom: 10px;
+        width: 60%;
+    }
+    .middle-part.first{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 0;
+    }
+    .right-part{
+        display: flex;
+        font-size: 10px;
+        width: 30%;
+        border-left: 1px solid black;
+    }
+    .question-spec{
+        border-collapse: collapse;
+        width: 100%;
+        table-layout: fixed;
+        padding: 0;
+    }
+
+    .question-spec td{
+        width: 16%;
+        word-wrap: break-word;
+        text-align: center;
+        padding: 3px;
+        border: none;
+        border-left: 1px solid black;
+
+    }
+    .question-spec td:first-child{
+        border:none;
+
+    }
 @media (width < 576px){
     .first-page{
         font-size: 10px;
