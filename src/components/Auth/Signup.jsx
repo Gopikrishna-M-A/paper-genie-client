@@ -105,7 +105,7 @@ const options = [
 export default function Signup() {
     const navigate = useNavigate();
     const [subjectsarr, setSubjects] = useState([['math', 'Maths'],['normal', 'English']]);
-
+    const [loading,setLoading] = useState(false)
     const nav = ()=> {
         navigate("/login")
     }
@@ -115,6 +115,7 @@ export default function Signup() {
     };
 
     const onFinish = async(values) => {
+        setLoading(true)
         try {        
             const subjects = subjectsarr.reduce((result, [type, name]) => {
               result[name] = type;
@@ -135,6 +136,8 @@ export default function Signup() {
           } catch (error) {
             message.error('Signup failed. Please try again.');
             console.error('Error:', error);
+          } finally{
+            setLoading(false)
           }
     };
     
@@ -221,7 +224,7 @@ export default function Signup() {
              </Form.Item>
  
              <Form.Item>
-             <Button block type="primary" htmlType="submit">
+             <Button loading={loading} block type="primary" htmlType="submit">
                  Sign up
              </Button>
              </Form.Item>

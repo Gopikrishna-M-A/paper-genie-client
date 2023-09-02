@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { useNavigate } from "react-router-dom";
 import { Button, Divider, Form, Input, message, Typography } from 'antd';
 import { GoogleOutlined } from '@ant-design/icons'
@@ -10,12 +10,14 @@ const { Text, Link } = Typography;
 
 export default function Login({ user, setUser}) {
   const navigate = useNavigate();
+  const [loading,setLoading] = useState(false)
 
   const nav = ()=> {
     navigate("/signup")
 }
 
   const onFinish = async(values) => {
+    setLoading(true)
     try {
       const response = await axios.post(`${baseURL}/auth/login`, values, {
         withCredentials: true, // Include cookies in the request
@@ -23,7 +25,6 @@ export default function Login({ user, setUser}) {
           'Content-Type': 'application/json'
         }
       });
-
       if (response.status === 200) { 
         message.success('Login successful.');
         axios
@@ -50,8 +51,10 @@ export default function Login({ user, setUser}) {
     } catch (error) {
       message.error('Login failed. Please try again.');
       console.error('Error:', error);
+    } finally{
+      setLoading(false)
     }
-  };
+  }; 
   const onFinishFailed = (errorInfo) => {
     console.log('Failed:', errorInfo);
   };
@@ -101,7 +104,7 @@ export default function Login({ user, setUser}) {
 
 
             <Form.Item>
-            <Button block type="primary" htmlType="submit">
+            <Button loading={loading} block type="primary" htmlType="submit">
             Sign in
             </Button>
             </Form.Item>

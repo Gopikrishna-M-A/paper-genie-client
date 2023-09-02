@@ -13,10 +13,10 @@ import Signup from './components/Auth/Signup'
 import Settings from "./components/Settings/Settings";
 import baseURL from './components/baseURL'
 import axios from 'axios'
-import { message } from "antd";
+import { message, ConfigProvider } from "antd";
 
 function App() {
-  const [user, setUser] = useState(null);
+  const [user, setUser] = useState(null)
   
   const handleWarning = () => {
     message.warning('Question added successfully!');
@@ -41,6 +41,17 @@ function App() {
 
 
   return (
+
+    <ConfigProvider
+    theme={{
+      token: {
+        // Seed Token
+        colorPrimary: "#242527",
+        // Alias Token
+        colorBgContainer: "#ffffff",
+      },
+    }}
+  >
     <Router>
       <Navbar user={user} setUser={setUser} className="nav" ></Navbar>
       <Routes>
@@ -49,13 +60,15 @@ function App() {
         <Route path="/Create-paper" element={user ? <GeneratePaper user={user} /> : <Login user={user}/>} />
         <Route path="/view-questions" element={user ? <Questions user={user} /> : <Login user={user}/>}  />
         <Route path="/question-paper" element={<QuestionPaper user={user} />} />
-        <Route path="/login" element={<Login user={user} setUser={setUser}/>} />
+        <Route path="/login" element={<Login user={user} setUser={setUser} />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="/settings" element={<Settings/>} />
       </Routes>
       <Footer></Footer>
 
     </Router>
+
+    </ConfigProvider>
   )
 }
 

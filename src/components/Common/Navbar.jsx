@@ -43,10 +43,6 @@ const Navbar = ({ user, setUser}) => {
       // Navigate to the /settings route
       navigate('/settings');
     }
-
-
-
-    console.log('click', e);
   };
   const items = [
     {
