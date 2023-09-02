@@ -1,7 +1,7 @@
 /* eslint-disable react/no-danger-with-children */
 import React, {useEffect, useState} from 'react'
 import { useLocation } from 'react-router-dom';
-import { Divider, Tag, Typography, Tooltip, Button } from 'antd';
+import { Typography, Tooltip, Button } from 'antd';
 import  "./question-paper.css"
 import { DownloadOutlined } from '@ant-design/icons';
 import baseURL from '../baseURL'
@@ -14,7 +14,7 @@ const { Text } = Typography;
 export default function QuestionPaper({user}) {
   
 
-  const [equationValue, setEquationValue] = useState(""); // State to store equation value
+  // const [equationValue, setEquationValue] = useState(""); // State to store equation value
   const [isSmallScreen, setIsSmallScreen] = useState(false);
   const location = useLocation();
   const data = location.state;
@@ -58,7 +58,7 @@ export default function QuestionPaper({user}) {
 
   // Handle equation value change
   const handleEquationChange = (newValue) => {
-    setEquationValue(newValue);
+    console.log("");
   };
 
 
@@ -165,7 +165,7 @@ export default function QuestionPaper({user}) {
             </div>
             <div className="middle-part">
   
-                  { user.subjects[question.subject] == "math" ? <EquationEditor value={question.question} onChange={handleEquationChange} autoCommands="pi theta sqrt sum prod alpha beta gamma rho int" autoOperatorNames="sin cos tan"/>: <div contentEditable className='question'>{question.question}</div>}
+                  { user.subjects[question.subject] === "math" ? <EquationEditor value={question.question} onChange={handleEquationChange} autoCommands="pi theta sqrt sum prod alpha beta gamma rho int" autoOperatorNames="sin cos tan"/>: <div contentEditable className='question'>{question.question}</div>}
 
                   {question.imageSrc && (
                     <img

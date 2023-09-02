@@ -1,11 +1,10 @@
 import React, { useState } from 'react'
 import SectionHead from '../Common/SectionHead'
 import { EditOutlined  } from '@ant-design/icons';
-import { Select, message } from 'antd';
+import { Select } from 'antd';
 import QuestionList from './QuestionList'
 
- 
-const { Option } = Select;
+
 
 
 

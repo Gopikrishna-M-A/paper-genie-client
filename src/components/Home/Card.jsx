@@ -1,20 +1,11 @@
-import React, { useRef } from 'react'
+import React from 'react'
 import { Link } from "react-router-dom";
-import { Button, ConfigProvider } from 'antd';
+import { Button } from 'antd';
 import { ArrowRightOutlined } from '@ant-design/icons';
 
 export default function Card({ icon, title, text, link, cardRef }) {
   return (
-    <ConfigProvider
-      theme={{
-        token: {
-          // Seed Token
-          colorPrimary: "#242527",
-          // Alias Token
-          colorBgContainer: "#ffffff",
-        },
-      }}
-    >
+
       <div ref={cardRef}  className='Home-Card'>
         <div className='Home-card-head'>
         { icon && React.cloneElement(icon, { className: 'Home-card-head-icon' }) }
@@ -29,6 +20,6 @@ export default function Card({ icon, title, text, link, cardRef }) {
       </div>
 
 
-    </ConfigProvider>
+
   );
 }

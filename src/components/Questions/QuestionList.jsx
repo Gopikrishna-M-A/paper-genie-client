@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { message, Modal, ConfigProvider, Button, Spin, Empty, Collapse, Tag } from 'antd';
+import { message, Modal, Button, Spin, Empty, Collapse, Tag } from 'antd';
 import { MathQuillStatic } from '../Common/MathQuillInput.jsx'
 import EditForm from './EditForm';
 import baseURL from '../baseURL'
@@ -134,16 +134,7 @@ const QuestionList = ({ subject, setSubject, user }) => {
 
 
   return (
-    <ConfigProvider
-    theme={{
-      token: {
-        // Seed Token
-        colorPrimary: "#242527",
-        // Alias Token
-        colorBgContainer: "#ffffff",
-      },
-    }}
-  >
+
     <div className='Questions-wrapper'>
       {loading ? ( // Display loading animation when loading is true
         <Spin size="large" style={{marginTop:"20px"}} />
@@ -188,7 +179,6 @@ const QuestionList = ({ subject, setSubject, user }) => {
         ))
       )}
     </div>
-    </ConfigProvider>
   );
 };
 

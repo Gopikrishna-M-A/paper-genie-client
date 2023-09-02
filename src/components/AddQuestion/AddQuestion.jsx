@@ -8,14 +8,11 @@ import baseURL from '../baseURL'
 import {
   message,
   Button,
-  ConfigProvider,
   Form,
   Input,
-  InputNumber,
   Select,
   Upload,
-  Modal,
-  Tooltip
+  Modal
 } from "antd";
 import { FileAddOutlined, PlusOutlined, InfoCircleOutlined } from "@ant-design/icons";
 import DynamicTableGenerator from "./DynamicTableGenerator";
@@ -110,16 +107,6 @@ export default function AddQuestion({user}) {
           title={"ADD QUESTION"}
         ></SectionHead>
 
-        <ConfigProvider
-          theme={{
-            token: {
-              // Seed Token
-              colorPrimary: "#242527",
-              // Alias Token
-              colorBgContainer: "#ffffff",
-            },
-          }}
-        >
 
           <Form
             labelCol={{ span: 4 }}
@@ -354,7 +341,6 @@ export default function AddQuestion({user}) {
             </Form.Item>
 
           </Form>
-        </ConfigProvider>
       </div>
     </div>
   );

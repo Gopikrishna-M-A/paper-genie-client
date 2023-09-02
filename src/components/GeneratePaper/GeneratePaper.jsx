@@ -2,7 +2,7 @@ import SectionHead from '../Common/SectionHead'
 import React, { useState, useEffect } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 import { useNavigate } from 'react-router-dom';
-import { ConfigProvider, Button, message, Typography, Form, Select } from 'antd';
+import { Button, message, Typography, Form, Select } from 'antd';
 import { CloudDownloadOutlined, PlusOutlined, CloseOutlined } from '@ant-design/icons';
 import baseURL from '../baseURL'
 
@@ -57,9 +57,9 @@ export default function GeneratePaper({user}) {
     setCriteria(criteria.filter((criterion) => criterion.key !== criteriaKey));
   };
 
-  const handleSuccess = (msg) => {
-    message.success(msg);
-  };
+  // const handleSuccess = (msg) => {
+  //   message.success(msg);
+  // };
   
   const handleError = (msg) => {
     message.error(msg);
@@ -114,16 +114,6 @@ export default function GeneratePaper({user}) {
 
 
   return (
-    <ConfigProvider
-      theme={{
-        token: {
-          colorPrimary: "#242527",
-          colorBgContainer: "#ffffff",
-        },
-      }}
-    >
-
-
       <div className='Generate-paper-page'>
 
         <SectionHead
@@ -240,6 +230,5 @@ export default function GeneratePaper({user}) {
           <Button className='Generate-btn' type="primary" size='large' onClick={submitForm} htmlType='submit' loading={loading}>GENERATE PAPER</Button>
         </Form>
       </div>
-    </ConfigProvider>
   );
 }
