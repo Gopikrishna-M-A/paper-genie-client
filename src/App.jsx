@@ -23,10 +23,10 @@ function App() {
         .get(`${baseURL}/auth/check-auth`, { withCredentials: true })
         .then((response) => {
           if (response.data.isAuthenticated) {
-            // User is authenticated
+            console.log("app:",response);
             setUser(response.data.user);
           } else {
-            // User is not authenticated
+            console.log("app else");
             setUser(null);
           }
         })
