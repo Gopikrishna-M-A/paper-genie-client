@@ -161,7 +161,6 @@ const QuestionList = ({ subject, setSubject, user }) => {
                     <Tag className='collapse-tag' bordered={false} color={q.Dlevel === 'Easy' ? 'green' : q.Dlevel === 'Difficult' ? 'red' : q.Dlevel === 'Moderate' ? 'blue' : 'black' }>{q.Dlevel}</Tag>
                     <Tag className='collapse-tag' bordered={false} color="default">mark : {q.mark}</Tag>
                     <Tag className='collapse-tag' bordered={false} color="default">sec : {q.section}</Tag>
-                    <Tag className='collapse-tag' bordered={false} color="default">space : {q.space}</Tag>
                     <Button size="small" type="primary" 
                     onClick={() => {
                       setEditModalVisible(true)

@@ -117,15 +117,6 @@ const EditForm = ({ visible, onCancel, onEdit, subject, user }) => {
             />
             </Form.Item>
 
-            <Form.Item label="Space" name="space" hasFeedback>
-            <InputNumber
-                placeholder="Space"
-                onChange={(value) =>
-                setEditedValues({ ...editedValues, space: value })
-                }
-            />
-            </Form.Item>
-
 
 
 
