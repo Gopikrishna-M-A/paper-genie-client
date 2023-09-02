@@ -17,10 +17,6 @@ export default function Questions({user}) {
   };
 
 
-  if(!user){
-    message.warning('Please log in to view questions..');
-  }
-  
   return (
       <div className="Questions-section">
         <SectionHead

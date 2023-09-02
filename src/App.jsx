@@ -13,10 +13,14 @@ import Signup from './components/Auth/Signup'
 import Settings from "./components/Settings/Settings";
 import baseURL from './components/baseURL'
 import axios from 'axios'
-function App() {
+import { message } from "antd";
 
+function App() {
   const [user, setUser] = useState(null);
   
+  const handleWarning = () => {
+    message.warning('Question added successfully!');
+  };
 
   useEffect(() => {
       axios
@@ -26,7 +30,6 @@ function App() {
             console.log("app:",response);
             setUser(response.data.user);
           } else {
-            console.log("app else");
             setUser(null);
           }
         })
@@ -42,9 +45,9 @@ function App() {
       <Navbar user={user} setUser={setUser} className="nav" ></Navbar>
       <Routes>
         <Route path="/" element={<Home user={user} />} />
-        <Route path="/Add-question" element={<AddQuestion user={user} />} />
-        <Route path="/Create-paper" element={<GeneratePaper user={user} />} />
-        <Route path="/view-questions" element={<Questions user={user} />} />
+        <Route path="/Add-question" element={user ? <AddQuestion user={user} /> : <Login user={user}/>} />
+        <Route path="/Create-paper" element={user ? <GeneratePaper user={user} /> : <Login user={user}/>} />
+        <Route path="/view-questions" element={user ? <Questions user={user} /> : <Login user={user}/>}  />
         <Route path="/question-paper" element={<QuestionPaper user={user} />} />
         <Route path="/login" element={<Login user={user} setUser={setUser}/>} />
         <Route path="/signup" element={<Signup />} />

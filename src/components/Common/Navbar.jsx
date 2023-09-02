@@ -91,8 +91,8 @@ const Navbar = ({ user, setUser}) => {
         </div>
 
         <div className="nav__collapsable">
-        {user && (
-        <>
+
+
           <Link onClick={closeNav} to="/Add-question">
             Add
           </Link>
@@ -102,8 +102,8 @@ const Navbar = ({ user, setUser}) => {
           <Link onClick={closeNav} to="/view-questions">
             View
           </Link>
-        </>
-      )}
+
+
       {user ? (
         <Dropdown.Button
           className="profile-big"

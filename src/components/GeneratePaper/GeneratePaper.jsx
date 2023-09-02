@@ -16,9 +16,7 @@ export default function GeneratePaper({user}) {
   const [ subject,setSubject] = useState()
   const [ section,setSection] = useState()
 
-  if(!user){
-    message.warning('Please log in to generate paper.');
-  }
+
   useEffect(() => {
     // Fetch data based on the selected subject
     if (subject) {

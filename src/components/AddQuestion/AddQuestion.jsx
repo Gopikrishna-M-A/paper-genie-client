@@ -28,6 +28,7 @@ const normFile = (e) => {
 };
 
 export default function AddQuestion({user}) {
+
   const navigate = useNavigate();
   const [showHelp, setShowHelp] = useState(false);
   const [equation, setEquation] = useState("");
@@ -37,7 +38,6 @@ export default function AddQuestion({user}) {
   const [subject, setSubject] = useState(null); // Add actual value
   const [loading, setLoading] = useState(false); // Add actual value
   const subjectType = user.subjects[subject];
-
       const handleSuccess = () => {
         message.success('Question added successfully!');
       };
@@ -45,10 +45,9 @@ export default function AddQuestion({user}) {
       const handleError = () => {
         message.error('Failed to add question. Please try again.');
       };
+   
 
-      if(!user){
-        message.warning('Please log in to add a question.');
-      }
+ 
     
     
 
@@ -69,7 +68,6 @@ export default function AddQuestion({user}) {
       formData.append("optb", values.optb);
       formData.append("optc", values.optc);
       formData.append("optd", values.optd);
-      formData.append("space", values.space);
       if(values.image){
         formData.append("image", values.image[0].originFileObj);
       }
@@ -336,17 +334,7 @@ export default function AddQuestion({user}) {
               <Input placeholder="option D"  />
             </Form.Item>
 
-            <Form.Item 
-            name="space"
-            rules={[
-              {
-                required: true,
-                message: 'Please add Section!',
-              },
-             ]}
-             hasFeedback>
-              <InputNumber placeholder="Spaces"  />
-            </Form.Item>
+
 
             <p>Insert Table</p>
 
