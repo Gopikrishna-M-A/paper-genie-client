@@ -128,15 +128,10 @@ export default function Signup() {
               subjects
             });
 
-            if (response.status === 201) { 
-              message.success('Signup successful.');
-              navigate('/login');
-            } else {
-              message.error('Signup failed. Please try again.');
-            }
+            message.success('Signup successful.');
+            navigate('/login');
+            console.log('Response from signup:', response.data.message);
             
-            
-            console.log('Response from login:', response);
           } catch (error) {
             message.error('Signup failed. Please try again.');
             console.error('Error:', error);
