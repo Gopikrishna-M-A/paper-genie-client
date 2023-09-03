@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import "./App.css";
 import Home from "./components/Home/Home";
 import GeneratePaper from "./components/GeneratePaper/GeneratePaper";
+import GenerateRandomPaper from "./components/GeneratePaper/RandomPaper";
 import Questions from "./components/Questions/Questions";
 import AddQuestion from "./components/AddQuestion/AddQuestion";
 import Navbar from "./components/Common/Navbar";
@@ -27,7 +28,6 @@ function App() {
         .get(`${baseURL}/auth/check-auth`, { withCredentials: true })
         .then((response) => {
           if (response.data.isAuthenticated) {
-            console.log("app:",response);
             setUser(response.data.user);
           } else {
             setUser(null);
@@ -58,6 +58,7 @@ function App() {
         <Route path="/" element={<Home user={user} />} />
         <Route path="/Add-question" element={user ? <AddQuestion user={user} /> : <Login user={user}/>} />
         <Route path="/Create-paper" element={user ? <GeneratePaper user={user} /> : <Login user={user}/>} />
+        <Route path="/Create-random-paper" element={user ? <GenerateRandomPaper user={user} /> : <Login user={user}/>} />
         <Route path="/view-questions" element={user ? <Questions user={user} /> : <Login user={user}/>}  />
         <Route path="/question-paper" element={<QuestionPaper user={user} />} />
         <Route path="/login" element={<Login user={user} setUser={setUser} />} />

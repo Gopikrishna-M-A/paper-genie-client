@@ -96,6 +96,7 @@ export default function GeneratePaper({user}) {
         if(data.unmatchedCriteria.length > 0){
           handleError("no match found for some criteria!")
         }else{
+          console.log("data",data);
           navigate('/question-paper',{ state: data });
         }
         setLoading(false);

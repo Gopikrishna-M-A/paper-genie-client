@@ -34,8 +34,15 @@ export default function Home() {
         <Card
           icon={<CloudDownloadOutlined />}
           title={"Generate Question Papers"}
-          text={"Create Paper"}
+          text={"Create Custom Paper"}
           link={"/Create-paper"}
+          cardRef={generatePaperCardRef}
+        ></Card>
+        <Card
+          icon={<CloudDownloadOutlined />}
+          title={"Generate Question Papers"}
+          text={"Create Random Paper"}
+          link={"/Create-random-paper"}
           cardRef={generatePaperCardRef}
         ></Card>
         <Card

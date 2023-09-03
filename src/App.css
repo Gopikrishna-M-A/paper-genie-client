@@ -200,6 +200,12 @@ body{
 }
 
 
+/* RANDOM GENERATE */
+
+.diffulty-ratio-wrapper{
+
+}
+
 /* QUESTION PAPER */
 
 .Question-paper-section{
@@ -213,7 +219,6 @@ body{
   justify-content: center;
   
 }
-
 
 
 /* FOOTER */
@@ -293,7 +298,15 @@ body{
     display: flex;
     gap: 10px;
   }
+  .samll-label{
+    display: none;
+  }
 
+  @media(max-width:576px){
+    .samll-label{
+      display: inline;
+    }
+  }
 
 
 @media (min-width: 711px) {
