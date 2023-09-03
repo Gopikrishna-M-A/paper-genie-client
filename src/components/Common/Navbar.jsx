@@ -92,7 +92,7 @@ const Navbar = ({ user, setUser}) => {
           <Link onClick={closeNav} to="/Add-question">
             Add
           </Link>
-          <Link onClick={closeNav} to="/Create-paper">
+          <Link onClick={closeNav} to="/Create">
             Create
           </Link>
           <Link onClick={closeNav} to="/view-questions">
