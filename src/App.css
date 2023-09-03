@@ -146,6 +146,9 @@ body{
 .collapse-tag{
   margin-top: 10px;
 }
+.question-update-btn{
+  margin-top: 10px;
+}
 
 /* GENERATE PAPER PAGE */
 .Generate-paper-page{
@@ -301,6 +304,141 @@ body{
   .samll-label{
     display: none;
   }
+
+
+
+
+
+  /* CREATE */
+  .generate-opt-section {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 100px 30px;
+  }
+  
+.custom-paper-card,
+.random-paper-card {
+  max-width: 100%;
+  width: 300px; /* Set a fixed width for both cards */
+  min-height: 400px; /* Set a fixed height for both cards */
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 20px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+  text-align: center;
+
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  justify-content: center;
+}
+
+.custom-paper-card h2,
+.random-paper-card h2 {
+  font-size: 1.5rem;
+}
+
+.custom-paper-card p,
+.random-paper-card p {
+  font-size: 1rem;
+}
+
+.custom-paper-card ul,
+.random-paper-card ul {
+  list-style-type: disc;
+  padding-left: 20px;
+  text-align: left;
+  margin-top: 10px;
+}
+
+.custom-paper-card ul li,
+.random-paper-card ul li {
+  font-size: 0.9rem;
+}
+
+
+/* TUTORIAL SECTION */
+
+
+.tutorial-section{
+  padding: 20px;
+}
+.tutorial-page {
+  max-width: 800px;
+  margin: 0 auto ;
+  padding: 20px;
+  background-color: #ffffff;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Header styles */
+.tutorial-section header {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.tutorial-section h1 {
+  font-size: 28px;
+  color: #1890ff;
+}
+
+/* Section styles */
+.tutorial-section section {
+  margin-bottom: 20px;
+}
+
+.tutorial-section h2 {
+  font-size: 24px;
+  color: #1890ff;
+  margin-bottom: 10px;
+}
+
+.tutorial-section h3 {
+  font-size: 20px;
+  color: #1890ff;
+  margin-top: 20px;
+}
+
+.tutorial-section ol {
+  list-style-type: decimal;
+  margin-left: 20px;
+}
+
+.tutorial-section li {
+  margin-bottom: 8px;
+  font-size: 14px;
+}
+
+/* Button styles */
+.tutorial-section .ant-btn {
+  margin-top: 8px;
+  margin-right: 8px;
+}
+
+/* Text styles */
+.tutorial-section .ant-typography {
+  font-size: 16px;
+  color: #333;
+}
+
+/* Note styles */
+.tutorial-section .note {
+  font-style: italic;
+  color: #999;
+}
+
+
+@media(width < 680px){
+  .generate-opt-section {
+    flex-direction: column;
+    gap: 20px;
+    padding: 50px 10px;
+  }
+}
+
+
 
   @media(max-width:576px){
     .samll-label{

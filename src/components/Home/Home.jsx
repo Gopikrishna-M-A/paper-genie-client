@@ -1,4 +1,6 @@
 import React, { useRef } from "react";
+import { Typography } from 'antd';
+import { Link } from 'react-router-dom';
 
 import {
   FileAddOutlined,
@@ -6,6 +8,9 @@ import {
   EditOutlined,
 } from "@ant-design/icons";
 import Card from "./Card";
+
+
+const { Text } = Typography;
 
 export default function Home() {
   const addQuestionsCardRef = useRef(null);
@@ -18,10 +23,11 @@ export default function Home() {
         <div className="Home-head-title">
           Create Custom Question Papers in Minutes
         </div>
-        <div className="Home-head-para">
+        <Text className="Home-head-para">
           Unlock the magic of quick and easy question paper generation with
           Effortless Paper Genie
-        </div>
+        </Text>
+        <Text type="secondary">Check out our <Link to="/tutorial" className="tutorial-link">Getting Started Guide</Link></Text>
       </div>
       <div className="Home-cards-wrapper">
         <Card
@@ -34,15 +40,8 @@ export default function Home() {
         <Card
           icon={<CloudDownloadOutlined />}
           title={"Generate Question Papers"}
-          text={"Create Custom Paper"}
-          link={"/Create-paper"}
-          cardRef={generatePaperCardRef}
-        ></Card>
-        <Card
-          icon={<CloudDownloadOutlined />}
-          title={"Generate Question Papers"}
-          text={"Create Random Paper"}
-          link={"/Create-random-paper"}
+          text={"Generate Paper"}
+          link={"/Create"}
           cardRef={generatePaperCardRef}
         ></Card>
         <Card

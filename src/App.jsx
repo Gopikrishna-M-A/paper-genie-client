@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import "./App.css";
 import Home from "./components/Home/Home";
+import GenerateOption from "./components/GeneratePaper/GenerateOption";
 import GeneratePaper from "./components/GeneratePaper/GeneratePaper";
 import GenerateRandomPaper from "./components/GeneratePaper/RandomPaper";
 import Questions from "./components/Questions/Questions";
@@ -12,6 +13,7 @@ import QuestionPaper from "./components/QuestionPaper/QuestionPaper"
 import Login from './components/Auth/Login'
 import Signup from './components/Auth/Signup'
 import Settings from "./components/Settings/Settings";
+import Tutorial from "./components/Tutorial/Tutorial"
 import baseURL from './components/baseURL'
 import axios from 'axios'
 import { message, ConfigProvider } from "antd";
@@ -56,8 +58,10 @@ function App() {
       <Navbar user={user} setUser={setUser} className="nav" ></Navbar>
       <Routes>
         <Route path="/" element={<Home user={user} />} />
+        <Route path="/tutorial" element={<Tutorial />} />
         <Route path="/Add-question" element={user ? <AddQuestion user={user} /> : <Login user={user}/>} />
-        <Route path="/Create-paper" element={user ? <GeneratePaper user={user} /> : <Login user={user}/>} />
+        <Route path="/Create" element={user ? <GenerateOption user={user} /> : <Login user={user}/>} />
+        <Route path="/Create-custom-paper" element={user ? <GeneratePaper user={user} /> : <Login user={user}/>} />
         <Route path="/Create-random-paper" element={user ? <GenerateRandomPaper user={user} /> : <Login user={user}/>} />
         <Route path="/view-questions" element={user ? <Questions user={user} /> : <Login user={user}/>}  />
         <Route path="/question-paper" element={<QuestionPaper user={user} />} />
