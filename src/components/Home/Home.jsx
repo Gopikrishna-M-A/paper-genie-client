@@ -23,7 +23,7 @@ export default function Home() {
         <div className="Home-head-title">
           Create Custom Question Papers in Minutes
         </div>
-        <Text className="Home-head-para">
+        <Text style={{maxWidth:"500px"}}>
           Unlock the magic of quick and easy question paper generation with
           Effortless Paper Genie
         </Text>
