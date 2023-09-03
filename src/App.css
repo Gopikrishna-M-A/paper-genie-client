@@ -444,6 +444,12 @@ body{
     .samll-label{
       display: inline;
     }
+    .tutorial-page {
+      padding: 0px;
+      background-color:transparent;
+      box-shadow:none;
+    }
+    
   }
 
 
