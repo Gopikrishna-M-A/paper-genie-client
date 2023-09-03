@@ -115,7 +115,7 @@ export default function GeneratePaper({user}) {
 
 
   return (
-      <div className='Generate-paper-page'>
+      <div style={{marginBottom:"50px"}} className='Generate-paper-page'>
 
         <SectionHead
           icon={<CloudDownloadOutlined />}

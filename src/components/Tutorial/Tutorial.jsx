@@ -30,7 +30,7 @@ export default function Tutorial() {
   
 
   return (
-    <div className="tutorial-section">
+    <div style={{marginBottom:"50px"}} className="tutorial-section">
       <div className="tutorial-page">
         <header>
           <Title level={1}>Welcome to Our Platform</Title>

@@ -100,7 +100,7 @@ export default function AddQuestion({user}) {
 
 
   return (
-    <div className="Add-question-section">
+    <div style={{marginBottom:"50px"}} className="Add-question-section">
       <div className="add-section-wrapper">
         <SectionHead
           icon={<FileAddOutlined />}

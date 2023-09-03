@@ -131,7 +131,7 @@ export default function QuestionPaper({user}) {
   };
 
   return (
-    <div className="Question-paper-section">
+    <div style={{marginBottom:"50px"}} className="Question-paper-section">
       <div id='a4' className="question-paper">
 
 

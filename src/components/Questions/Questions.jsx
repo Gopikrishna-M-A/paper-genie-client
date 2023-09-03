@@ -17,7 +17,7 @@ export default function Questions({user}) {
 
 
   return (
-      <div className="Questions-section">
+      <div style={{marginBottom:"50px"}} className="Questions-section section">
         <SectionHead
           icon={<EditOutlined />}
           title={"QUESTIONS"}
