@@ -14,11 +14,13 @@ export default function RandomPaper({ user }) {
   const [ easy, setEasy ] = useState(0)
   const [ diff, setDiff ] = useState(0)
   const [ med, setMed ] = useState(0)
+  const [ loading, setLoading] = useState(false)
 
   const onFinish = async (values) => {
     const sum = values.difficult + values.medium + values.easy;
 
     try {
+      setLoading(true)
       // Send the form data to the API endpoint with credentials
       const response = await fetch(`${baseURL}/questions/filter/random`, {
         method: "POST", // Change to the appropriate HTTP method (POST, GET, etc.)
@@ -41,6 +43,8 @@ export default function RandomPaper({ user }) {
       // Handle network or other errors
       console.error("API request error:", error);
       message.error("An error occurred while sending data to the API.");
+    }finally{
+      setLoading(false)
     }
   };
   const onFinishFailed = (errorInfo) => {
@@ -139,6 +143,7 @@ export default function RandomPaper({ user }) {
           type="primary"
           size="large"
           htmlType="submit"
+          loading={loading}
         >
           GENERATE PAPER
         </Button>
