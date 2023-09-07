@@ -156,11 +156,14 @@ const QuestionList = ({ subject, setSubject, user }) => {
                   q.question
                 ) ,
                 children: (
-                  <div>
+                  <div className='question-info-tags'>
+                    <div className='left-align'>
                     <Tag className='collapse-tag' bordered={false} color="default">{q.Clevel}</Tag>
                     <Tag className='collapse-tag' bordered={false} color={q.Dlevel === 'Easy' ? 'green' : q.Dlevel === 'Difficult' ? 'red' : q.Dlevel === 'Moderate' ? 'blue' : 'black' }>{q.Dlevel}</Tag>
                     <Tag className='collapse-tag' bordered={false} color="default">mark : {q.mark}</Tag>
                     <Tag className='collapse-tag' bordered={false} color="default">sec : {q.section}</Tag>
+                    </div>
+                    <div className='right-align'>
                     <Button size="small" type="primary" 
                     onClick={() => {
                       setEditModalVisible(true)
@@ -170,6 +173,7 @@ const QuestionList = ({ subject, setSubject, user }) => {
                       > Edit </Button>
                     <Button className='question-update-btn' onClick={() => handleDelete(q._id)} style={{marginLeft:"10px"}} size="small" type="primary"> Delete </Button>
                     <EditForm className='question-update-btn' user={user} visible={editModalVisible} onCancel={() => setEditModalVisible(false)} onEdit={handleEdit} subject={subject}/>
+                    </div>
                   </div> 
                 ),
               },
