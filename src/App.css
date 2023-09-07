@@ -540,8 +540,6 @@ body {
   }
 
   .Home-section {
-    padding-left: 40px;
-    padding-right: 40px;
     flex-direction: row;
     overflow: hidden;
     margin: 0;
@@ -569,7 +567,7 @@ body {
     z-index: -1;
     position: absolute;
     left: 10;
-    width: 1000px;
+    width: 1050px;
     object-fit: cover;
   
   }
@@ -594,8 +592,8 @@ body {
   /* HOME */
 
   .Home-section {
-    padding-left: 40px;
-    padding-right: 40px;
+    padding-left: 100px;
+    padding-right: 100px;
   }
 
   .Home-head-title {
