@@ -57,6 +57,7 @@ function App() {
     <Router>
       <Navbar user={user} setUser={setUser} className="nav" ></Navbar>
       <Routes >
+        <Route path="/*" element={<Home user={user} />} />
         <Route path="/" element={<Home user={user} />} />
         <Route path="/tutorial" element={<Tutorial />} />
         <Route path="/Add-question" element={user ? <AddQuestion user={user} /> : <Login user={user}/>} />
