@@ -63,7 +63,7 @@ export default function Login({ user, setUser}) {
        <div className='Login-page'>
 
          <div className="login-head">Hey,Hello</div>
-         <div className="login-para">Enter the information you entered while registering.</div>
+         <div className="login-para font">Enter the information you entered while registering.</div>
          <Form
             className='login-form'
             name="basic"
@@ -86,7 +86,7 @@ export default function Login({ user, setUser}) {
                 },
             ]}
             >
-            <Input placeholder='Username'/>
+            <Input size='large' placeholder='Username'/>
             </Form.Item>
 
             <Form.Item
@@ -99,12 +99,12 @@ export default function Login({ user, setUser}) {
                 },
             ]}
             >
-            <Input.Password placeholder='password'/>
+            <Input.Password size='large' placeholder='password'/>
             </Form.Item>
 
 
             <Form.Item>
-            <Button loading={loading} block type="primary" htmlType="submit">
+            <Button  size='large'loading={loading} block type="primary" htmlType="submit">
             Sign in
             </Button>
             </Form.Item>
@@ -112,7 +112,7 @@ export default function Login({ user, setUser}) {
             <Divider id='login-line' plain>or</Divider>
 
             <Form.Item>
-            <Button icon={<GoogleOutlined />} block  >
+            <Button size='large' icon={<GoogleOutlined />} block  >
                 Sign in with Google
             </Button>
             </Form.Item>

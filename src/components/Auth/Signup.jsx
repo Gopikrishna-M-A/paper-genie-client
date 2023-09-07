@@ -150,7 +150,7 @@ export default function Signup() {
         <div className='Login-page'>
  
           <div className="login-head">Hey,Hello</div>
-          <div className="login-para">Enter your information to register.</div>
+          <div className="login-para font">Enter your information to register.</div>
           <Form
              className='login-form'
              name="basic"
@@ -171,7 +171,7 @@ export default function Signup() {
                  },
              ]}
              >
-             <Input placeholder='Username'/>
+             <Input size='large' placeholder='Username'/>
              </Form.Item>
 
              <Form.Item
@@ -185,7 +185,7 @@ export default function Signup() {
                  },
              ]}
              >
-             <Input placeholder='Email'/>
+             <Input size='large' placeholder='Email'/>
              </Form.Item>
  
              <Form.Item
@@ -198,15 +198,16 @@ export default function Signup() {
                  },
              ]}
              >
-             <Input.Password placeholder='password'/>
+             <Input.Password size='large' placeholder='password'/>
              </Form.Item>
 
              <Form.Item hasFeedback name="phone" >
-             <Input placeholder='Phone'/>
+             <Input size='large' placeholder='Phone'/>
              </Form.Item>
 
              <Form.Item hasFeedback> 
              <Cascader
+                size='large'
                 placeholder="Subjects"
                 style={{
                 width: '100%',
@@ -224,7 +225,7 @@ export default function Signup() {
              </Form.Item>
  
              <Form.Item>
-             <Button loading={loading} block type="primary" htmlType="submit">
+             <Button size='large' loading={loading} block type="primary" htmlType="submit">
                  Sign up
              </Button>
              </Form.Item>
@@ -232,7 +233,7 @@ export default function Signup() {
              <Divider id='login-line' plain>or</Divider>
  
              <Form.Item>
-             <Button icon={<GoogleOutlined />} block  >
+             <Button size='large' icon={<GoogleOutlined />} block  >
                  Sign in with Google
              </Button>
              </Form.Item>

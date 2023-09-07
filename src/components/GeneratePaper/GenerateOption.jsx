@@ -1,5 +1,5 @@
 import React from 'react'
-import { Button, Typography } from "antd";
+import { Button, Typography, Tag } from "antd";
 import { Link } from 'react-router-dom';
 
 const { Title, Text } = Typography;
@@ -10,24 +10,24 @@ export default function GenerateOption() {
     <div className="custom-paper-card">
       <Title level={1}>Custom Paper</Title>
       {/* <Text type={'secondary'}>Create a paper with specific criteria:</Text> */}
-      <ul className='main'>
-        <li><Text>Choose the number of questions.</Text></li>
-        <li><Text>Select difficulty levels.</Text></li>
-        <li><Text>Select Cognitive levels.</Text></li>
-        <li><Text>Specify section</Text></li>
-        <li><Text>Specify subject</Text></li>
-      </ul>
+      <div className='main'>
+      <Tag style={{width:"100%"}}><Text>Choose the number of questions</Text></Tag>
+         <Tag style={{width:"100%"}}><Text>Select difficulty levels</Text></Tag>
+         <Tag style={{width:"100%"}}><Text>Select Cognitive levels</Text></Tag>
+         <Tag style={{width:"100%"}}><Text>Specify section</Text></Tag>
+         <Tag style={{width:"100%"}}><Text>Specify subject</Text></Tag>
+      </div>
       <Link to={"/Create-custom-paper"}><Button block type='primary' size='large'>Generate Custom Paper</Button></Link>
     </div>
     
     <div className="random-paper-card">
       <Title level={1}>Random Paper</Title>
       {/* <Text type={'secondary'}>Generate a paper with random questions:</Text> */}
-      <ul className='main'>
-        <li><Text>Specify the number of easy, medium, and hard questions needed.</Text></li>
-        <li><Text>Quickly create papers without specifying individual questions.</Text></li>
-        <li><Text>Specify subject</Text></li>
-      </ul>
+      <div className='main'>
+        <Tag style={{width:"100%"}}><Text>Specify the number of easy, medium <br /> and hard questions</Text></Tag>
+        <Tag style={{width:"100%",maxWidth:"100%"}}><Text>Quickly create papers without <br /> specifying individual questions.</Text></Tag>
+        <Tag style={{width:"100%"}}><Text>Specify subject</Text></Tag>
+      </div>
       <Link to={"/Create-random-paper"}><Button block type='primary' size='large'>Generate Random Paper</Button></Link>
       
     </div>

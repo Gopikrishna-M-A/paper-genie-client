@@ -1,31 +1,36 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&family=Righteous&display=swap');
-*{
+@import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@300;400;500;600;700&family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
+
+/* font-family: 'Fredoka', sans-serif;
+font-family: 'Inter', sans-serif; */
+
+* {
   padding: 0;
   margin: 0;
   box-sizing: border-box;
-  --primary-color: #18181A;     
+  --primary-color: #18181A;
   --secondary-color: #242527;
-  --pri-bg-color:#FBFBFB;
-  --sec-bg-color:#ffffff;
+  --pri-bg-color: #FBFBFB;
+  --sec-bg-color: #ffffff;
 }
 
-body{
+body {
   background-color: var(--pri-bg-color);
-  font-family: 'Poppins', sans-serif !important;
+  font-family: 'Inter', sans-serif !important;
 }
 
 
 /* COMMON */
 .section-head {
-  font-family: 'Righteous';
+  font-family: 'Fredoka', sans-serif;
   font-style: normal;
-  font-weight: 400;
+  font-weight: 500;
   font-size: 20px;
   display: flex;
   gap: 10px;
 }
 
-.section-icon{
+.section-icon {
   font-size: 20px;
   font-weight: bold;
 }
@@ -33,78 +38,111 @@ body{
 
 /* HOME */
 
-.Home-section{
+.Home-section {
+  min-height: 650px;
   padding: 20px;
   display: flex;
-  flex-direction: column;
+  flex-direction: column-reverse;
+  align-items: center;
+  position: relative;
+  overflow:hidden;
+}
+.home-left{
+  width: 100%;
 }
 
-.Home-head{
+.tutorial-link{
+  margin-top: 10px;
+}
+.home-right{
+  width: 100%;
+  height: 300px;
+  /* position: relative; */
+}
+.gome-img-container{
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: -80px;
+}
+.home-img{
+  z-index: -1;
+  width: 500px;
+  object-fit: cover;
+
+}
+.home-buttons{
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.Home-head {
   display: flex;
   flex-direction: column;
   gap: 10px;
   margin-bottom: 30px;
 }
 
-.Home-head-title{
-  font-family: 'Righteous';
+.Home-head-title {
+  font-family: 'Fredoka', sans-serif;
   font-style: normal;
-  font-weight: 400;
+  font-weight: 600;
   font-size: 26px;
   line-height: 116.5%;
 }
 
-.Home-head-para{
+.Home-head-para {
   font-style: normal;
   font-weight: 275;
   font-size: 14px;
   line-height: 21px;
 }
 
-.Home-cards-wrapper{
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
+/* 
 
-.Home-Card{
+.Home-Card {
   padding: 20px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   gap: 15px;
-  background-color:  var(--sec-bg-color);
+  background-color: var(--sec-bg-color);
   border-radius: 10px;
   box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
   font-weight: 500;
 }
 
-.Home-card-head{
+.Home-card-head {
   display: flex;
   gap: 10px;
   align-items: center;
 }
-.btn-link-home{
+
+.btn-link-home {
   width: fit-content;
 }
-.Home-card-head-icon{
-  font-size: 30px;  
+
+.Home-card-head-icon {
+  font-size: 30px;
   font-weight: bold;
 }
-.Home-card-button{
+
+.Home-card-button {
   display: flex;
   align-items: center;
   flex-direction: row-reverse;
   justify-content: space-between;
   gap: 10px;
 }
-
+ */
 
 
 
 /* ADD QUSTION */
 
-.Add-question-section{
+.Add-question-section {
   padding: 20px;
   display: flex;
   flex-direction: column;
@@ -112,7 +150,7 @@ body{
   justify-content: center;
 }
 
-.add-section-wrapper{
+.add-section-wrapper {
   display: flex;
   flex-direction: column;
   max-width: 600px;
@@ -120,12 +158,12 @@ body{
 
 }
 
-.input-row-col{
+.input-row-col {
   margin-top: 20px;
 }
 
 /* QUSTIONS */
-.Questions-section{
+.Questions-section {
   padding: 20px;
   display: flex;
   flex-direction: column;
@@ -135,7 +173,7 @@ body{
   margin: auto;
 }
 
-.Questions-wrapper{
+.Questions-wrapper {
   display: flex;
   flex-direction: column;
   gap: 10px;
@@ -143,15 +181,16 @@ body{
 
 }
 
-.collapse-tag{
+.collapse-tag {
   margin-top: 10px;
 }
-.question-update-btn{
+
+.question-update-btn {
   margin-top: 10px;
 }
 
 /* GENERATE PAPER PAGE */
-.Generate-paper-page{
+.Generate-paper-page {
   padding: 20px;
   display: flex;
   flex-direction: column;
@@ -161,34 +200,34 @@ body{
   margin: auto;
 }
 
-.Generate-form{
-  margin-top:20px;
+.Generate-form {
+  margin-top: 20px;
   display: flex;
   flex-direction: column;
   gap: 10px;
 }
 
-.question-criteria-wrapper{
-    max-width: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    align-items: flex-end;
-    padding: 5px;
-    border-radius: 6px;
-    box-shadow: 0px 3px 25px 3px rgba(0, 0, 0, 0.1);
-    gap: 5px;
+.question-criteria-wrapper {
+  max-width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-end;
+  padding: 5px;
+  border-radius: 6px;
+  box-shadow: 0px 3px 25px 3px rgba(0, 0, 0, 0.1);
+  gap: 5px;
 
 }
 
 
-.spec-item{
-  width: 100% ;
+.spec-item {
+  width: 100%;
   margin: 0;
 }
 
 
-.add-btn-wrapper{
+.add-btn-wrapper {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -198,20 +237,18 @@ body{
   gap: 10px;
 }
 
-.Generate-btn{
+.Generate-btn {
   margin-top: 20px;
 }
 
 
 /* RANDOM GENERATE */
 
-.diffulty-ratio-wrapper{
-
-}
+.diffulty-ratio-wrapper {}
 
 /* QUESTION PAPER */
 
-.Question-paper-section{
+.Question-paper-section {
   display: flex;
   flex-direction: column;
   max-width: 600px;
@@ -220,13 +257,13 @@ body{
   /* aspect-ratio: 1/1.4 ; */
   margin: auto;
   justify-content: center;
-  
+
 }
 
 
 /* FOOTER */
 .Footer {
-  padding: 10px ;
+  padding: 10px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -248,38 +285,40 @@ body{
 
 
 /* LOGIN PAGE */
-.Login-page{
+.Login-page {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   padding: 20px;
 }
-.login-form{
+
+.login-form {
   max-width: 400px;
   width: 100%;
 }
 
-.login-head{
-  font-family: 'Righteous';
-  font-weight: 400;
+.login-head {
+  font-family: 'Fredoka', sans-serif ;
+  font-weight: 600;
   font-size: 30px;
   color: #121212;
   text-align: left;
   max-width: 400px;
   width: 100%;
 }
-.login-para{
+
+.login-para {
   max-width: 400px;
   width: 100%;
   font-family: 'Poppins';
-  font-weight: 200;
+  font-weight: 400;
   color: rgb(41, 41, 41);
   margin-bottom: 20px;
   margin-top: 5px;
 }
 
-#login-line{
+#login-line {
   color: #dedede !important;
   border-color: #dedede !important;
 }
@@ -289,46 +328,49 @@ body{
 
 
 /* SETTINGS */
-  .settings{
-    padding: 20px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    max-width: 600px;
-    width: 100%;
-    margin: auto;
-  }
+.settings {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  max-width: 600px;
+  width: 100%;
+  margin: auto;
+}
 
-  .settings-conent-wrapper{
-    padding: 30px 20px;
-  }
+.settings-conent-wrapper {
+  padding: 30px 20px;
+}
 
-  .sub-inputs{
-    display: flex;
-    gap: 10px;
-  }
-  .samll-label{
-    display: none;
-  }
+.sub-inputs {
+  display: flex;
+  gap: 10px;
+}
 
-
-
+.samll-label {
+  display: none;
+}
 
 
-  /* CREATE */
-  .generate-opt-section {
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    padding: 100px 30px;
-    padding-top: 50px;
-  }
-  
+
+
+
+/* CREATE */
+.generate-opt-section {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding: 100px 30px;
+  padding-top: 50px;
+}
+
 .custom-paper-card,
 .random-paper-card {
   max-width: 100%;
-  width: 300px; /* Set a fixed width for both cards */
-  height: 362px; /* Set a fixed height for both cards */
+  width: 300px;
+  /* Set a fixed width for both cards */
+  height: 362px;
+  /* Set a fixed height for both cards */
   background-color: #fff;
   border: 1px solid #ccc;
   border-radius: 5px;
@@ -369,13 +411,14 @@ body{
 /* TUTORIAL SECTION */
 
 
-.tutorial-section{
+.tutorial-section {
   padding: 20px;
 }
+
 .tutorial-page {
   border-radius: 6px;
   max-width: 800px;
-  margin: 0 auto ;
+  margin: 0 auto;
   padding: 20px;
   background-color: #ffffff;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
@@ -438,7 +481,14 @@ body{
 }
 
 
-@media(width < 680px){
+.main{
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+
+@media(width < 680px) {
   .generate-opt-section {
     flex-direction: column;
     gap: 20px;
@@ -448,42 +498,70 @@ body{
 
 
 
-  @media(max-width:576px){
-    .samll-label{
-      display: inline;
-    }
-    .tutorial-page {
-      padding: 0px;
-      background-color:transparent;
-      box-shadow:none;
-    }
-    
+@media(max-width:576px) {
+  .samll-label {
+    display: inline;
   }
+
+  .tutorial-page {
+    padding: 0px;
+    background-color: transparent;
+    box-shadow: none;
+  }
+
+}
 
 
 @media (min-width: 711px) {
 
   /* HOME */
 
-  .Home-section{
-    padding-left: 40px;
-    padding-right: 40px;
-  }
-  .Home-head-title{
-    max-width: 1000px;
-    width: 100%;
-    font-size: 55px;
+  .home-buttons{
+    flex-direction: row;
   }
 
-  .Home-cards-wrapper{
+  .Home-section {
+    padding-left: 40px;
+    padding-right: 40px;
+    flex-direction: row;
+    overflow: hidden;
+  }
+
+  .gome-img-container{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+  }
+  .home-left{
+    width: 50%;
+  }
+  .home-right{
+    width: 50%;
+    /* position: relative; */
+  }
+  .home-img{
+    z-index: -1;
+    position: absolute;
+    left: 10;
+    width: 1000px;
+    object-fit: cover;
+  
+  }
+
+  .Home-head-title {
+    max-width: 600px;
+    width: 100%;
+    font-weight: 500;
+    font-size: 40px;
+  }
+
+  .Home-cards-wrapper {
     flex-direction: row;
     gap: 10px;
   }
-
-
-
-
-
 
 }
 
@@ -492,17 +570,19 @@ body{
 
   /* HOME */
 
-  .Home-section{
+  .Home-section {
     padding-left: 40px;
     padding-right: 40px;
   }
-  .Home-head-title{
-    font-size: 75px;
+
+  .Home-head-title {
+    font-size: 50px;
   }
-  .Home-Card{
+
+  .Home-Card {
     width: 365px;
   }
-  
+
 
 
 
@@ -510,18 +590,21 @@ body{
 
 
 }
+
 @media (min-width: 500px) {
+
   /* GENERATE */
-  .question-criteria-wrapper{
+  .question-criteria-wrapper {
     flex-direction: row;
   }
 
-  .spec-item{
-    width: 20% ;
+  .spec-item {
+    width: 20%;
     margin: 0;
   }
-  .spec-item:nth-child(4){
-  flex: 1;
+
+  .spec-item:nth-child(4) {
+    flex: 1;
   }
 
 

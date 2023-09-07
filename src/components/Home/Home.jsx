@@ -1,5 +1,5 @@
-import React, { useRef } from "react";
-import { Typography } from 'antd';
+import React, { useState, useEffect } from "react";
+import { Typography, Button } from 'antd';
 import { Link } from 'react-router-dom';
 
 import {
@@ -13,44 +13,67 @@ import Card from "./Card";
 const { Text } = Typography;
 
 export default function Home() {
-  const addQuestionsCardRef = useRef(null);
-  const generatePaperCardRef = useRef(null);
-  const updateBankCardRef = useRef(null);
+  const [isMobile, setIsMobile] = useState(window.innerWidth < 711);
+
+  useEffect(() => {
+    // Add an event listener to handle window resize
+    const handleResize = () => {
+      setIsMobile(window.innerWidth < 711);
+    };
+
+    window.addEventListener('resize', handleResize);
+
+    // Clean up the event listener when the component unmounts
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
 
   return (
     <div className="Home-section">
-      <div className="Home-head">
-        <div className="Home-head-title">
-          Create Custom Question Papers in Minutes
+      <div className="home-left">
+        <div className="Home-head">
+          <div className="Home-head-title">
+            Create Custom Question Papers in Minutes
+          </div>
+
+          <Text
+            className="font"
+            style={{ maxWidth: "500px", marginTop: "10px" }}
+          >
+            Unlock the magic of quick and easy question paper generation with
+            Effortless Paper Genie
+          </Text>
+
+          <Text type="secondary">
+            Check out our{" "}
+            <Link to="/tutorial" className="tutorial-link font">
+              Getting Started Guide
+            </Link>
+          </Text>
+
+          <div style={{ marginTop: "30px" }} className="home-buttons">
+            <Link to="/Add-question">
+              <Button block size="large" type="primary">
+                ADD QUESTION
+              </Button>
+            </Link>
+            <Link to="/Create">
+              <Button block size="large">
+                GENERATE PAPER
+              </Button>
+            </Link>
+          </div>
         </div>
-        <Text style={{maxWidth:"500px"}}>
-          Unlock the magic of quick and easy question paper generation with
-          Effortless Paper Genie
-        </Text>
-        <Text type="secondary">Check out our <Link to="/tutorial" className="tutorial-link">Getting Started Guide</Link></Text>
       </div>
-      <div className="Home-cards-wrapper">
-        <Card
-          icon={<FileAddOutlined />}
-          title={"Effortlessly Add Questions"}
-          text={"Add Questions"}
-          link={"/Add-question"}
-          cardRef={addQuestionsCardRef}
-        ></Card>
-        <Card
-          icon={<CloudDownloadOutlined />}
-          title={"Generate Question Papers"}
-          text={"Generate Paper"}
-          link={"/Create"}
-          cardRef={generatePaperCardRef}
-        ></Card>
-        <Card
-          icon={<EditOutlined />}
-          title={"Update Question bank "}
-          text={"View Questions"}
-          link={"/view-questions"}
-          cardRef={updateBankCardRef}
-        ></Card>
+      <div className="home-right">
+        <div className="gome-img-container">
+          {isMobile ? (
+            <img src="/home1.png" alt="" className="home-img" />
+          ) : (
+            <img src="/home.png" alt="" className="home-img" />
+          )}
+        </div>
       </div>
     </div>
   );
