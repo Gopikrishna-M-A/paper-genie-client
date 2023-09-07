@@ -63,8 +63,9 @@ html {
 .nav--expanded .nav__collapsable {
     max-height: 500px;
     /* This is what shows the content */
-    margin-top: 1rem;
+    /* margin-top: 1rem; */
     padding: 2rem 0;
+    z-index: 1;
 }
 
 
