@@ -56,7 +56,7 @@ export default function Tutorial() {
                 and generate the table.
               </li>
               <li>
-                Finally, click the <Button onClick={()=>handleButtonClick("submitted successfully!")} type="primary">Submit</Button> button to add the new question to the
+                Finally, click the <Button size='small' onClick={()=>handleButtonClick("submitted successfully!")} type="primary">Submit</Button> button to add the new question to the
                 database.
               </li>
         
@@ -89,18 +89,18 @@ export default function Tutorial() {
                 properties.
               </li>
               <li>
-                Click <Button onClick={()=>handleButtonClick("saved successfully!")} type="primary">Save</Button> to save the changes
-                or <Button  type="default">Cancel</Button> to discard them.
+                Click <Button size='small'  onClick={()=>handleButtonClick("saved successfully!")} type="primary">Save</Button> to save the changes
+                or <Button size='small'   type="default">Cancel</Button> to discard them.
               </li>
             </ol>
-            <Button type="primary" onClick={showModal}>
+            <Button size='small'  type="primary" onClick={showModal}>
               Show Example Modal
             </Button>
           </section>
 
           <section>
             <Title level={2}>3. Two Ways to Create Paper</Title>
-            <Collapse accordion>
+            <Collapse  accordion>
               <Panel header="Random Paper Generation" key="1">
                 <ol>
                   <li>
@@ -110,7 +110,7 @@ export default function Tutorial() {
                   <li>Select the subject for the paper.</li>
                   <li>The total number of questions will be displayed.</li>
                   <li>
-                    Click the <Button onClick={()=>handleWarning("No match found!")} type="primary">Generate</Button> button to
+                    Click the <Button size='small'  onClick={()=>handleWarning("No match found!")} type="primary">Generate</Button> button to
                     create a random paper.
                   </li>
                   
@@ -132,7 +132,7 @@ export default function Tutorial() {
                     sections added.
                   </li>
                   <li>
-                    Click the <Button onClick={()=>handleWarning("No match found!")} type="primary">Generate Paper</Button> button to create a paper based on your
+                    Click the <Button size='small'  onClick={()=>handleWarning("No match found!")} type="primary">Generate Paper</Button> button to create a paper based on your
                     criteria.
                   </li>
                   <li>
