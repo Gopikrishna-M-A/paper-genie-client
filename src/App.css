@@ -39,7 +39,6 @@ body {
 /* HOME */
 
 .Home-section {
-  z-index: -2;
   min-height: 650px;
   padding: 20px;
   display: flex;

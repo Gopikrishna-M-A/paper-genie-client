@@ -25,6 +25,7 @@ html {
 }
 
 .nav-left-sec{
+    z-index: 1;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -35,7 +36,6 @@ html {
 .nav__collapser {
     font-size: 23px;
     font-weight: bolder;
-
 }
 
 .nav__brand {
