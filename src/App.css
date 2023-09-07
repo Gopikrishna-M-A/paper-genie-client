@@ -27,7 +27,7 @@ body {
   font-weight: 500;
   font-size: 20px;
   display: flex;
-  gap: 10px;
+  gap: 50px;
 }
 
 .section-icon {
@@ -46,9 +46,11 @@ body {
   align-items: center;
   position: relative;
   overflow:hidden;
+  margin-top: -90px;
 }
 .home-left{
   width: 100%;
+  margin-top: -80px;
 }
 
 .tutorial-link{
@@ -56,19 +58,17 @@ body {
 }
 .home-right{
   width: 100%;
-  height: 300px;
-  /* position: relative; */
+
 }
 .gome-img-container{
   width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-top: -80px;
 }
 .home-img{
   z-index: -1;
-  width: 500px;
+  width: 400px;
   object-fit: cover;
 
 }
@@ -79,6 +79,7 @@ body {
 }
 
 .Home-head {
+  margin-top: 30px;
   display: flex;
   flex-direction: column;
   gap: 10px;
@@ -543,6 +544,10 @@ body {
     padding-right: 40px;
     flex-direction: row;
     overflow: hidden;
+    margin: 0;
+  }
+  .Home-head {
+    margin: 0;
   }
 
   .gome-img-container{
