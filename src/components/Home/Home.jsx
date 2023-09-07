@@ -7,7 +7,6 @@ import {
   CloudDownloadOutlined,
   EditOutlined,
 } from "@ant-design/icons";
-import Card from "./Card";
 
 
 const { Text } = Typography;
