@@ -39,6 +39,7 @@ body {
 /* HOME */
 
 .Home-section {
+  z-index: -2;
   min-height: 650px;
   padding: 20px;
   display: flex;
@@ -67,7 +68,6 @@ body {
   align-items: center;
 }
 .home-img{
-  z-index: -1;
   width: 400px;
   object-fit: cover;
 
