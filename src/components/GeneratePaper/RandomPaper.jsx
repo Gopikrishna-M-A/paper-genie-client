@@ -122,7 +122,7 @@ export default function RandomPaper({ user }) {
             rules={[
               {
                 required: true,
-                message: "Please input number of questions!",
+                message: "Please input the subject!",
               },
             ]}
           >

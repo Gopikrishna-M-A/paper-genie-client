@@ -112,7 +112,7 @@ export default function Login({ user, setUser}) {
             <Divider id='login-line' plain>or</Divider>
 
             <Form.Item>
-            <Button size='large' icon={<GoogleOutlined />} block  >
+            <Button disabled size='large' icon={<GoogleOutlined />} block  >
                 Sign in with Google
             </Button>
             </Form.Item>

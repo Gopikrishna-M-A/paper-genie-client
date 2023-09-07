@@ -202,7 +202,7 @@ export default function Signup() {
              </Form.Item>
 
              <Form.Item hasFeedback name="phone" >
-             <Input size='large' placeholder='Phone'/>
+             <Input size='large' placeholder='Phone (Optional)'/>
              </Form.Item>
 
              <Form.Item hasFeedback> 
@@ -233,7 +233,7 @@ export default function Signup() {
              <Divider id='login-line' plain>or</Divider>
  
              <Form.Item>
-             <Button size='large' icon={<GoogleOutlined />} block  >
+             <Button disabled size='large' icon={<GoogleOutlined />} block  >
                  Sign in with Google
              </Button>
              </Form.Item>
