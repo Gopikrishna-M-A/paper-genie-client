@@ -36,13 +36,14 @@ export default function RandomPaper({ user }) {
         const data = await response.json();
         navigate("/question-paper", { state: data });
       } else {
-        // Handle errors from the API
-        message.error("Error sending data to the API.");
+        const errorResponse = await response.json(); // Parse the error response JSON
+        const errorMessage = errorResponse.message || "An error occurred";
+        message.error(errorMessage);
       }
     } catch (error) {
       // Handle network or other errors
       console.error("API request error:", error);
-      message.error("An error occurred while sending data to the API.");
+      message.error("API request error.");
     }finally{
       setLoading(false)
     }

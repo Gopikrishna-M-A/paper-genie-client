@@ -108,6 +108,12 @@ html {
     color: black;
 }
 
+
+
+.nav__collapsable .ant-space-compact-block {
+    width: fit-content;
+}
+
 @media (width < 700px){
     .profile-small{
         display: inline;
@@ -118,7 +124,7 @@ html {
 }
 
 /* Desktop mode styles */
-@media (min-width: 700px) {
+@media (min-width: 780px) {
 
     .nav-left-sec{
         width: fit-content;

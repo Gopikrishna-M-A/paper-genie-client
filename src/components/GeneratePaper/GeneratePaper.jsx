@@ -96,18 +96,19 @@ export default function GeneratePaper({user}) {
         if(data.unmatchedCriteria.length > 0){
           handleError("no match found for some criteria!")
         }else{
-          console.log("data",data);
           navigate('/question-paper',{ state: data });
         }
-        setLoading(false);
 
       } else {
-        handleError(response.statusText)
-        console.error('Error:', response.statusText);
-        setLoading(false);
+        const errorResponse = await response.json(); // Parse the error response JSON
+        const errorMessage = errorResponse.message || "An error occurred";
+        handleError(errorMessage)
       }
     } catch (error) {
+      handleError(error)
       console.error('Error sending request:', error);
+    }finally{
+      setLoading(false);
     }
   };
   

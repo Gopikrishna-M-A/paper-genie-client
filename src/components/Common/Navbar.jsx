@@ -90,13 +90,13 @@ const Navbar = ({ user, setUser}) => {
 
 
           <Link className="link-item" onClick={closeNav} to="/Add-question">
-            Add
+            Add Question
           </Link>
           <Link className="link-item" onClick={closeNav} to="/Create">
-            Create
+            Create Paper
           </Link>
           <Link className="link-item" onClick={closeNav} to="/view-questions">
-            View
+            Question Bank
           </Link>
 
 
