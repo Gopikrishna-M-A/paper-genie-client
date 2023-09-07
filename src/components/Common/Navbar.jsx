@@ -80,7 +80,7 @@ const Navbar = ({ user, setUser}) => {
           />
         ) : (
           <Link to="/login" className="profile-small">
-            <Button>Login</Button>
+            <Button type="primary">Login</Button>
           </Link>
         )}
         </div>
@@ -89,13 +89,13 @@ const Navbar = ({ user, setUser}) => {
         <div className="nav__collapsable">
 
 
-          <Link onClick={closeNav} to="/Add-question">
+          <Link className="link-item" onClick={closeNav} to="/Add-question">
             Add
           </Link>
-          <Link onClick={closeNav} to="/Create">
+          <Link className="link-item" onClick={closeNav} to="/Create">
             Create
           </Link>
-          <Link onClick={closeNav} to="/view-questions">
+          <Link className="link-item" onClick={closeNav} to="/view-questions">
             View
           </Link>
 
@@ -111,7 +111,7 @@ const Navbar = ({ user, setUser}) => {
         </Dropdown.Button>
       ) : (
         <Link to="/login" className="profile-big">
-          <Button>Login</Button>
+          <Button >Login</Button>
         </Link>
 )}
 

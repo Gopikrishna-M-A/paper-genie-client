@@ -63,7 +63,7 @@ export default function Login({ user, setUser}) {
        <div className='Login-page'>
 
          <div className="login-head">Hey,Hello</div>
-         <div className="login-para font">Enter the information you entered while registering.</div>
+         <div className="login-para font">Sign in to continue.</div>
          <Form
             className='login-form'
             name="basic"

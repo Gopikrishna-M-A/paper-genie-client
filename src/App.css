@@ -27,7 +27,7 @@ body {
   font-weight: 500;
   font-size: 20px;
   display: flex;
-  gap: 50px;
+  gap: 20px;
 }
 
 .section-icon {
@@ -358,7 +358,8 @@ body {
 /* CREATE */
 .generate-opt-section {
   display: flex;
-  justify-content: space-around;
+  justify-content: center;
+  gap: 20px;
   align-items: center;
   padding: 100px 30px;
   padding-top: 50px;
@@ -384,28 +385,9 @@ body {
   justify-content: space-between;
 }
 
-.custom-paper-card h2,
-.random-paper-card h2 {
-  font-size: 1.5rem;
-}
 
-.custom-paper-card p,
-.random-paper-card p {
-  font-size: 1rem;
-}
 
-.custom-paper-card ul,
-.random-paper-card ul {
-  list-style-type: disc;
-  padding-left: 20px;
-  text-align: left;
-  margin-top: 10px;
-}
 
-.custom-paper-card ul li,
-.random-paper-card ul li {
-  font-size: 0.9rem;
-}
 
 
 /* TUTORIAL SECTION */

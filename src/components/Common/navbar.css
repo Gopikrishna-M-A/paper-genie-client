@@ -94,6 +94,19 @@ html {
 }
 
 
+.link-item{
+    font-family: "Inter", sans-serif;
+    font-size: 16px;
+    font-weight: 500;
+    margin-top: 5px;
+    color: grey;
+    transition: .2s all ease-in-out;
+}
+
+.link-item:hover{
+    color: black;
+}
+
 @media (width < 700px){
     .profile-small{
         display: inline;

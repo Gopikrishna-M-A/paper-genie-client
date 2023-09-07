@@ -4,7 +4,7 @@ import { SettingOutlined  } from '@ant-design/icons';
 import { Typography, Button, Select, Form, Input, message } from 'antd';
 import axios from 'axios';
 import baseURL from '../baseURL'
-const { Title } = Typography;
+const { Title, Text } = Typography;
 
 
 export default function Settings() {
@@ -102,6 +102,8 @@ export default function Settings() {
             </Form>
             </div>
           </div>
+
+          <Text type='secondary'>In our 'Add Subject' section, you have the power to expand your question library by introducing new subjects.</Text>
         </div>
     </div>
   )
