@@ -235,6 +235,7 @@ export default function QuestionPaper({user}) {
         onClick={handleDownloadPDF}
         disabled={isSmallScreen}
         block
+        type='primary'
         icon={<DownloadOutlined />}
       >
         Download

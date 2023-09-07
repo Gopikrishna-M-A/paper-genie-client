@@ -222,7 +222,7 @@ export default function GeneratePaper({user}) {
                  </Select>
                  </Form.Item>
               
-              <Button onClick={() => removeCriteria(criterion.key)} type="text" danger>
+              <Button onClick={() => removeCriteria(criterion.key)} type='primary' danger>
                 <CloseOutlined />
               </Button>
             </div>

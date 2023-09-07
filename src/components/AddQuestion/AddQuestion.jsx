@@ -34,9 +34,12 @@ export default function AddQuestion({user}) {
   const [colCount, setColCount] = useState(null); // Add actual value
   const [subject, setSubject] = useState(null); // Add actual value
   const [loading, setLoading] = useState(false); // Add actual value
+  const [form] = Form.useForm();
   const subjectType = user.subjects[subject];
       const handleSuccess = () => {
         message.success('Question added successfully!');
+        form.resetFields(); 
+        setEquation("")
       };
       
       const handleError = () => {
@@ -86,6 +89,7 @@ export default function AddQuestion({user}) {
         console.log("Response data:", response.data)
         handleSuccess();
         setLoading(false)
+
       } catch (error) {
         console.error("Error:", error);
         handleError();
@@ -109,6 +113,7 @@ export default function AddQuestion({user}) {
 
 
           <Form
+            form={form}
             labelCol={{ span: 4 }}
             wrapperCol={{ span: 14 }}
             layout="horizontal"
