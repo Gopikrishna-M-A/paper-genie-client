@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Button, Divider, message, Form, Input, Cascader, Typography } from 'antd';
+import { Button, Divider, message, Form, Input, Cascader, Typography, Tooltip } from 'antd';
 import { GoogleOutlined } from '@ant-design/icons'
 import axios from 'axios';
 import { useNavigate } from "react-router-dom";
@@ -233,9 +233,11 @@ export default function Signup() {
              <Divider id='login-line' plain>or</Divider>
  
              <Form.Item>
+             <Tooltip title="Google Sign-In is currently under development.">
              <Button disabled size='large' icon={<GoogleOutlined />} block  >
                  Sign in with Google
              </Button>
+             </Tooltip>
              </Form.Item>
              <Text type="secondary">Have an account? <Link onClick={nav} >Sign in</Link></Text> 
          </Form>
