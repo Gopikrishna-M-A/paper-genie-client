@@ -20,7 +20,7 @@ export default function Login({ user, setUser}) {
     setLoading(true)
     try {
       const response = await axios.post(`${baseURL}/auth/login`, values, {
-        withCredentials: true, // Include cookies in the request
+        withCredentials: true, 
         headers: {
           'Content-Type': 'application/json'
         }
@@ -31,32 +31,26 @@ export default function Login({ user, setUser}) {
         .get(`${baseURL}/auth/check-auth`, { withCredentials: true })
         .then((response) => {
           if (response.data.isAuthenticated) {
-            // User is authenticated
             setUser(response.data.user);
           } else {
-            // User is not authenticated
             setUser(null);
           }
         })
         .catch((error) => {
-          console.error("Error fetching user data:", error);
+          console.error("Error fetching user data");
         });
         navigate('/');
       } else {
-        message.error('Login failed. Please try again.');
+        message.error(response.data.message);
       }
-  
-      const responseData = response.data;
-      console.log('Response from login:', responseData);
     } catch (error) {
-      message.error('Login failed. Please try again.');
-      console.error('Error:', error);
+      message.error(error.response.data.error);
     } finally{
       setLoading(false)
     }
   }; 
   const onFinishFailed = (errorInfo) => {
-    console.log('Failed:', errorInfo);
+    console.log('Form failed');
   };
 
   return (

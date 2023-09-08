@@ -114,7 +114,7 @@ html {
     width: fit-content;
 }
 
-@media (width < 700px){
+@media (width < 780px){
     .profile-small{
         display: inline;
     }

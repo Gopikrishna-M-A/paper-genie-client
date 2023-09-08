@@ -129,20 +129,21 @@ export default function Signup() {
               subjects
             });
 
-            message.success('Signup successful.');
-            navigate('/login');
-            console.log('Response from signup:', response.data.message);
-            
+            if (response.status == 201) {
+              message.success('Signup successful.');
+              navigate('/login');
+            }else{
+              message.error(response.data.message);
+            }
           } catch (error) {
-            message.error('Signup failed. Please try again.');
-            console.error('Error:', error);
+            message.error(error.response.data.error);
           } finally{
             setLoading(false)
           }
     };
     
     const onFinishFailed = (errorInfo) => {
-     console.log('Failed:', errorInfo);
+     console.log('Form failed')
     };
       
 
